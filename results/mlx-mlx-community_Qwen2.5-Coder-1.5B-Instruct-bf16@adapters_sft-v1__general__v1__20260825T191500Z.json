@@ -1,0 +1,808 @@
+{
+  "model": "mlx:mlx-community/Qwen2.5-Coder-1.5B-Instruct-bf16@adapters/sft-v1",
+  "prompt": "v1",
+  "note": "arm 1 general",
+  "tasks": "general",
+  "task_set_hash": "818cf42f7691",
+  "n_tasks": 60,
+  "timestamp": "20260825T191500Z",
+  "overall": 0.1,
+  "by_category": {
+    "general_python": 0.1
+  },
+  "elapsed_seconds": 147.41655015945435,
+  "median_chars": 34,
+  "runaway": 7,
+  "records": [
+    {
+      "id": "g_reverse_string",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": "sralop",
+      "expected": "sralop",
+      "code": "result = s[::-1]",
+      "raw_chars": 16
+    },
+    {
+      "id": "g_sum_list",
+      "category": "general_python",
+      "passed": false,
+      "ran": true,
+      "produced": 3,
+      "expected": 14,
+      "code": "result = int(nums[0])",
+      "raw_chars": 21
+    },
+    {
+      "id": "g_word_count",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'df' is not defined",
+      "expected": {
+        "a": 3,
+        "b": 1,
+        "c": 1
+      },
+      "code": "g = df['words'].value_counts().to_list()",
+      "raw_chars": 40
+    },
+    {
+      "id": "g_filter_even",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "SyntaxError: unterminated string literal (detected at line 5)",
+      "expected": [
+        2,
+        4,
+        6
+      ],
+      "code": "result = nums[0]['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o",
+      "raw_chars": 859
+    },
+    {
+      "id": "g_sort_dicts",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "SyntaxError: unmatched ')'",
+      "expected": [
+        "b",
+        "a"
+      ],
+      "code": "result = people.sort('age', descending=False).get('name', 'o'))['name'] = x['age']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['",
+      "raw_chars": 894
+    },
+    {
+      "id": "g_flatten",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "SyntaxError: invalid syntax",
+      "expected": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "code": "result = nested\n!result = nested\n!result = result = nested\n!result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result = result = result = result = nested\n!result =",
+      "raw_chars": 2039
+    },
+    {
+      "id": "g_dedupe_order",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "TypeError: list indices must be integers or slices, not str",
+      "expected": [
+        "a",
+        "b",
+        "c"
+      ],
+      "code": "result = items = sorted(items, key=items.count)['a'] + result['b']",
+      "raw_chars": 66
+    },
+    {
+      "id": "g_second_largest",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'df' is not defined",
+      "expected": 7,
+      "code": "result = int(df['second_largest'])",
+      "raw_chars": 34
+    },
+    {
+      "id": "g_invert_dict",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "TypeError: 'dict_items' object is not subscriptable",
+      "expected": {
+        "1": "a",
+        "2": "b"
+      },
+      "code": "result = d.items()['a'].to_list()",
+      "raw_chars": 33
+    },
+    {
+      "id": "g_zip_to_dict",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'int' object has no attribute 'to_list'",
+      "expected": {
+        "x": 10,
+        "y": 20
+      },
+      "code": "result = dict(zip(keys, vals))['x'].to_list()",
+      "raw_chars": 45
+    },
+    {
+      "id": "g_running_total",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'list' object has no attribute 'cum_sum'",
+      "expected": [
+        1,
+        3,
+        6
+      ],
+      "code": "result = nums.cum_sum()['cum_sum'].to_list()",
+      "raw_chars": 44
+    },
+    {
+      "id": "g_group_by_letter",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "SyntaxError: unmatched ')'",
+      "expected": {
+        "a": [
+          "ant",
+          "ape"
+        ],
+        "b": [
+          "bee"
+        ]
+      },
+      "code": "g = df['names'].str[0].alias('r'))\nresult = dict(zip(g['r'].to_list(), g['o'].to_list()))",
+      "raw_chars": 89
+    },
+    {
+      "id": "g_palindrome",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": true,
+      "expected": true,
+      "code": "result = s == s[::-1]",
+      "raw_chars": 21
+    },
+    {
+      "id": "g_join_words",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": "a - b - c",
+      "expected": "a - b - c",
+      "code": "result = ' - '.join(parts)",
+      "raw_chars": 26
+    },
+    {
+      "id": "g_strip_split",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'list' object has no attribute 'map'",
+      "expected": [
+        "a",
+        "b",
+        "c"
+      ],
+      "code": "result = line.split(',').map(str).to_list()",
+      "raw_chars": 43
+    },
+    {
+      "id": "g_max_by_key",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'df' is not defined",
+      "expected": "b",
+      "code": "result = df['name'].to_list()",
+      "raw_chars": 29
+    },
+    {
+      "id": "g_any_over",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": true,
+      "expected": true,
+      "code": "result = any(nums)",
+      "raw_chars": 18
+    },
+    {
+      "id": "g_dict_get_default",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "KeyError: 'missing'",
+      "expected": 0,
+      "code": "result = d['missing']",
+      "raw_chars": 21
+    },
+    {
+      "id": "g_sort_two_keys",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "SyntaxError: unmatched ')'",
+      "expected": [
+        9,
+        1,
+        4
+      ],
+      "code": "result = rows.sort('grp', 'v').alias('o'))['o'].to_list()",
+      "raw_chars": 57
+    },
+    {
+      "id": "g_char_count",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": 3,
+      "expected": 3,
+      "code": "result = s.count('a')",
+      "raw_chars": 21
+    },
+    {
+      "id": "g_merge_dicts",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "SyntaxError: unterminated string literal (detected at line 6)",
+      "expected": {
+        "a": 1,
+        "b": 9,
+        "c": 3
+      },
+      "code": "result = d1 | d2['a'].to_list()['b'].to_list()['c'].to_list()['o'].to_list()['r'].to_list()['r'].to_list()['o'].to_list()['r'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['o'].to_list()['",
+      "raw_chars": 1278
+    },
+    {
+      "id": "g_label_numbers",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'df' is not defined",
+      "expected": [
+        "neg",
+        "zero",
+        "pos"
+      ],
+      "code": "result = df.with_columns(pl.when(pl.col('nums') < 0).then(pl.lit('neg')).otherwise(pl.lit('pos')).alias('o'))['o'].to_list()",
+      "raw_chars": 124
+    },
+    {
+      "id": "g_slice_step",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "SyntaxError: unterminated string literal (detected at line 5)",
+      "expected": [
+        1,
+        3,
+        5
+      ],
+      "code": "result = items[0]['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o",
+      "raw_chars": 860
+    },
+    {
+      "id": "g_nested_get",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "SyntaxError: unmatched ')'",
+      "expected": 5432,
+      "code": "result = cfg['db'].get('port', 5432))['port']",
+      "raw_chars": 45
+    },
+    {
+      "id": "g2_sum_squares",
+      "category": "general_python",
+      "passed": false,
+      "ran": true,
+      "produced": 1,
+      "expected": 30,
+      "code": "result = int(nums[0])",
+      "raw_chars": 21
+    },
+    {
+      "id": "g2_count_vowels",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'df' is not defined",
+      "expected": 5,
+      "code": "result = int(df['o'].sum())",
+      "raw_chars": 27
+    },
+    {
+      "id": "g2_title_case",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'str' object has no attribute 'str'",
+      "expected": "Hello Wide World",
+      "code": "result = s.str.capitalize()['first'].to_list()",
+      "raw_chars": 46
+    },
+    {
+      "id": "g2_index_of",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": 1,
+      "expected": 1,
+      "code": "result = nums.index(7)",
+      "raw_chars": 22
+    },
+    {
+      "id": "g2_drop_falsy",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'list' object has no attribute 'filter'",
+      "expected": [
+        "a",
+        3,
+        "b"
+      ],
+      "code": "result = items = items.filter(lambda x: x != '' and x != 0).to_list()",
+      "raw_chars": 69
+    },
+    {
+      "id": "g2_chunk",
+      "category": "general_python",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        1,
+        2
+      ],
+      "expected": [
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5
+        ]
+      ],
+      "code": "result = nums\nresult = result[0:2]",
+      "raw_chars": 34
+    },
+    {
+      "id": "g2_transpose",
+      "category": "general_python",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        1,
+        2,
+        3
+      ],
+      "expected": [
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          6
+        ]
+      ],
+      "code": "result = rows[0]",
+      "raw_chars": 16
+    },
+    {
+      "id": "g2_min_by_key",
+      "category": "general_python",
+      "passed": false,
+      "ran": true,
+      "produced": "a",
+      "expected": "b",
+      "code": "result = people[0]['name']",
+      "raw_chars": 26
+    },
+    {
+      "id": "g2_filter_dict",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "SyntaxError: unmatched ')'",
+      "expected": {
+        "b": 30,
+        "c": 11
+      },
+      "code": "result = d, d['a'] > 10 and d['b'] > 10 and d['c'] > 10)['a'] + d['b'] + d['c']]['a'] + d['b'] + d['c']]['a'] + d['b'] + d['c']]['a'] + d['b'] + d['c']]['a'] + d['b'] + d['c']]['a'] + d['b'] + d['c']]['a'] + d['b'] + d['c']]['a'] + d['b'] + d['c']]['a'] + d['b'] + d['c']]['a'] + d['b'] + d['c']]['a'] + d['b'] + d['c']]['a'] + d['b'] + d['c']]['a'] + d['b'] + d['c']]['a'] + d['b'] + d['c']]['a'] + d['b'] + d['c']]['a'] + d['b']['a'] + d['b']['a'] + d['b']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a']['a",
+      "raw_chars": 896
+    },
+    {
+      "id": "g2_sort_dict_by_value",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'list' object has no attribute 'to_list'",
+      "expected": [
+        "b",
+        "c",
+        "a"
+      ],
+      "code": "result = d = sorted(d, key=d.get, reverse=True).to_list()",
+      "raw_chars": 57
+    },
+    {
+      "id": "g2_rotate",
+      "category": "general_python",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        3,
+        4,
+        5
+      ],
+      "expected": [
+        3,
+        4,
+        5,
+        1,
+        2
+      ],
+      "code": "result = items[2:5]",
+      "raw_chars": 19
+    },
+    {
+      "id": "g2_common",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "TypeError: unsupported operand type(s) for &: 'list' and 'list'",
+      "expected": [
+        3,
+        4
+      ],
+      "code": "result = a & b",
+      "raw_chars": 14
+    },
+    {
+      "id": "g2_difference",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "TypeError: unsupported operand type(s) for -: 'list' and 'list'",
+      "expected": [
+        1,
+        2
+      ],
+      "code": "result = a - b",
+      "raw_chars": 14
+    },
+    {
+      "id": "g2_is_subset",
+      "category": "general_python",
+      "passed": false,
+      "ran": true,
+      "produced": false,
+      "expected": true,
+      "code": "result = a in b",
+      "raw_chars": 15
+    },
+    {
+      "id": "g2_sort_chars",
+      "category": "general_python",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        "a",
+        "l",
+        "o",
+        "p",
+        "r",
+        "s"
+      ],
+      "expected": "aloprs",
+      "code": "result = sorted(s)",
+      "raw_chars": 18
+    },
+    {
+      "id": "g2_reverse_words",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "TypeError: string indices must be integers, not 'str'",
+      "expected": "three two one",
+      "code": "result = s.split(' ')[0]['o'] + s.split(' ')[1]['o'] + s.split(' ')[2]['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']['o']",
+      "raw_chars": 880
+    },
+    {
+      "id": "g2_longest_word",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "TypeError: list indices must be integers or slices, not str",
+      "expected": "cccc",
+      "code": "result = s.split()['a'].max()",
+      "raw_chars": 29
+    },
+    {
+      "id": "g2_sum_digits",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'df' is not defined",
+      "expected": 12,
+      "code": "result = int(df['o1'].sum())",
+      "raw_chars": 28
+    },
+    {
+      "id": "g2_to_binary",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'df' is not defined",
+      "expected": "1010",
+      "code": "result = int(df['n'].to_list())",
+      "raw_chars": 31
+    },
+    {
+      "id": "g2_pairs_to_dict",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "SyntaxError: unmatched ')'",
+      "expected": {
+        "a": 1,
+        "b": 2
+      },
+      "code": "g = df = df.with_columns('r'))\nresult = dict(zip(g['r'].to_list(), g['r'].to_list()))['r'].to_list()",
+      "raw_chars": 100
+    },
+    {
+      "id": "g2_interleave",
+      "category": "general_python",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        1,
+        3,
+        5,
+        2,
+        4,
+        6
+      ],
+      "expected": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "code": "result = a + b",
+      "raw_chars": 14
+    },
+    {
+      "id": "g2_dedupe_string",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'd' is not defined. Did you mean: 'id'?",
+      "expected": "ban",
+      "code": "result = s = s.replace(d, d[0])['first'] + s['second']",
+      "raw_chars": 54
+    },
+    {
+      "id": "g2_group_parity",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "KeyError: 'even'",
+      "expected": {
+        "even": [
+          2,
+          4
+        ],
+        "odd": [
+          1,
+          3
+        ]
+      },
+      "code": "result = dict(zip(nums, nums))['even'].to_list()",
+      "raw_chars": 48
+    },
+    {
+      "id": "g2_cumprod",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "SyntaxError: unmatched ')'",
+      "expected": [
+        1,
+        2,
+        6,
+        24
+      ],
+      "code": "result = nums = nums.cum_sum().alias('o'))['o'].to_list()",
+      "raw_chars": 57
+    },
+    {
+      "id": "g2_pairwise_sums",
+      "category": "general_python",
+      "passed": false,
+      "ran": true,
+      "produced": 3,
+      "expected": [
+        3,
+        5,
+        7
+      ],
+      "code": "result = nums[0] + nums[1]",
+      "raw_chars": 26
+    },
+    {
+      "id": "g2_max_consecutive",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'df' is not defined",
+      "expected": 3,
+      "code": "result = int(df['items'].n_unique())",
+      "raw_chars": 36
+    },
+    {
+      "id": "g2_factorial",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'df' is not defined",
+      "expected": 720,
+      "code": "result = int(df['n'].to_list())",
+      "raw_chars": 31
+    },
+    {
+      "id": "g2_fizz_labels",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "SyntaxError: '(' was never closed",
+      "expected": [
+        "fizz",
+        "buzz",
+        "both",
+        "7"
+      ],
+      "code": "result = df.with_columns((df['nums'].div(3).alias('o'))['o'].to_list()",
+      "raw_chars": 70
+    },
+    {
+      "id": "g2_is_prime_list",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "SyntaxError: unmatched ')'",
+      "expected": [
+        7,
+        11
+      ],
+      "code": "result = nums.filter(self.is_prime))['is_prime'].to_list()",
+      "raw_chars": 58
+    },
+    {
+      "id": "g2_gcd",
+      "category": "general_python",
+      "passed": false,
+      "ran": true,
+      "produced": 48,
+      "expected": 6,
+      "code": "result = int(a)",
+      "raw_chars": 15
+    },
+    {
+      "id": "g2_word_lengths",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": {
+        "ab": 2,
+        "cde": 3,
+        "f": 1
+      },
+      "code": "g = s.split()",
+      "raw_chars": 13
+    },
+    {
+      "id": "g2_nested_sum",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'df' is not defined",
+      "expected": 15,
+      "code": "result = int(df['o1'].sum())",
+      "raw_chars": 28
+    },
+    {
+      "id": "g2_replace_substr",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "SyntaxError: unmatched ')'",
+      "expected": "dog and dog",
+      "code": "result = s = s.replace('cat', 'dog').alias('o'))['o'].to_list()",
+      "raw_chars": 63
+    },
+    {
+      "id": "g2_count_above_mean",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'df' is not defined",
+      "expected": 1,
+      "code": "result = int(df['nums'].mean())",
+      "raw_chars": 31
+    },
+    {
+      "id": "g2_swap_case",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'str' object has no attribute 'str'",
+      "expected": "pOlArS",
+      "code": "result = s.str.to_uppercase()['result'].to_list()",
+      "raw_chars": 49
+    },
+    {
+      "id": "g2_zip_longest_pad",
+      "category": "general_python",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        1,
+        2,
+        3,
+        "x"
+      ],
+      "expected": [
+        [
+          1,
+          "x"
+        ],
+        [
+          2,
+          null
+        ],
+        [
+          3,
+          null
+        ]
+      ],
+      "code": "result = a + b",
+      "raw_chars": 14
+    }
+  ]
+}

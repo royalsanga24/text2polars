@@ -1,0 +1,1188 @@
+{
+  "model": "mlx:mlx-community/Qwen2.5-Coder-1.5B-Instruct-bf16",
+  "prompt": "v1",
+  "note": "held-out 88",
+  "tasks": "test",
+  "task_set_hash": "bf9b938ab249",
+  "n_tasks": 88,
+  "timestamp": "20260827T115606Z",
+  "overall": 0.2727272727272727,
+  "by_category": {
+    "held_out": 0.2727272727272727
+  },
+  "elapsed_seconds": 71.5020260810852,
+  "median_chars": 59,
+  "runaway": 0,
+  "records": [
+    {
+      "id": "ho_to_dict",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "TypeError: DataFrame.to_dict() got an unexpected keyword argument 'orient'",
+      "expected": {
+        "a": [
+          1,
+          2
+        ],
+        "b": [
+          "x",
+          "y"
+        ]
+      },
+      "code": "result = df.to_dict(orient='records')",
+      "raw_chars": 51
+    },
+    {
+      "id": "ho_rows",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'to_list'. Did you mean: 'to_dict'?",
+      "expected": [
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          4
+        ]
+      ],
+      "code": "result = df.to_list()",
+      "raw_chars": 35
+    },
+    {
+      "id": "ho_row_single",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "TypeError: 'ExprListNameSpace' object is not callable",
+      "expected": [
+        2,
+        "y"
+      ],
+      "code": "result = df.select(pl.col('a').list().get(1)).to_list()[0]",
+      "raw_chars": 72
+    },
+    {
+      "id": "ho_to_series",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        4,
+        5,
+        6
+      ],
+      "expected": [
+        4,
+        5,
+        6
+      ],
+      "code": "result = df['only'].to_list()",
+      "raw_chars": 43
+    },
+    {
+      "id": "ho_get_column",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        9,
+        8
+      ],
+      "expected": [
+        9,
+        8
+      ],
+      "code": "result = df['b'].to_list()",
+      "raw_chars": 40
+    },
+    {
+      "id": "ho_dtype_name",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'Int64' object has no attribute 'name'",
+      "expected": "Int64",
+      "code": "result = df.schema['a'].name",
+      "raw_chars": 42
+    },
+    {
+      "id": "ho_equals",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": true,
+      "expected": true,
+      "code": "result = df.equals(df2)",
+      "raw_chars": 37
+    },
+    {
+      "id": "ho_equals_false",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": false,
+      "expected": false,
+      "code": "result = df.equals(df2)",
+      "raw_chars": 37
+    },
+    {
+      "id": "ho_is_sorted",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": true,
+      "expected": true,
+      "code": "result = df['v'].is_sorted()",
+      "raw_chars": 42
+    },
+    {
+      "id": "ho_is_sorted_false",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": false,
+      "expected": false,
+      "code": "result = df['v'].is_sorted()",
+      "raw_chars": 42
+    },
+    {
+      "id": "ho_reverse",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        3,
+        2,
+        1
+      ],
+      "expected": [
+        3,
+        2,
+        1
+      ],
+      "code": "result = df['v'].reverse().to_list()",
+      "raw_chars": 50
+    },
+    {
+      "id": "ho_last_value",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": 7,
+      "expected": 9,
+      "code": "result = df['v'].to_list()[0]",
+      "raw_chars": 43
+    },
+    {
+      "id": "ho_first_value_expr",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": 7,
+      "expected": 7,
+      "code": "result = df.select(pl.col('v').first()).item()",
+      "raw_chars": 60
+    },
+    {
+      "id": "ho_exclude",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        "b",
+        "c"
+      ],
+      "expected": [
+        "a",
+        "c"
+      ],
+      "code": "result = df.columns[1:]",
+      "raw_chars": 37
+    },
+    {
+      "id": "ho_sort_by",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'sort_values'",
+      "expected": [
+        "q",
+        "r",
+        "p"
+      ],
+      "code": "result = df.sort_values(by='score').select('name').to_list()",
+      "raw_chars": 74
+    },
+    {
+      "id": "ho_is_null_mask",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'Series' object has no attribute 'tolist'. Did you mean: 'to_list'?",
+      "expected": [
+        false,
+        true,
+        false
+      ],
+      "code": "result = df['v'].is_null().tolist()",
+      "raw_chars": 49
+    },
+    {
+      "id": "ho_count_non_null",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": 2,
+      "expected": 2,
+      "code": "result = df.filter(pl.col('v').is_not_null()).shape[0]",
+      "raw_chars": 68
+    },
+    {
+      "id": "ho_vstack",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'Series' object has no attribute 'tolist'. Did you mean: 'to_list'?",
+      "expected": [
+        1,
+        2,
+        3
+      ],
+      "code": "result = df2['a'].tolist() + df['a'].tolist()",
+      "raw_chars": 59
+    },
+    {
+      "id": "ho_extend_series",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "code": "result = s1.append(s2).to_list()",
+      "raw_chars": 46
+    },
+    {
+      "id": "ho_to_frame_columns",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'Series' object has no attribute 'columns'",
+      "expected": [
+        "speed"
+      ],
+      "code": "result = s.columns",
+      "raw_chars": 32
+    },
+    {
+      "id": "ho_struct_unnest",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        "pair"
+      ],
+      "expected": [
+        "a",
+        "b"
+      ],
+      "code": "result = df.select(pl.struct(['a', 'b']).alias('pair')).columns",
+      "raw_chars": 77
+    },
+    {
+      "id": "ho_implode",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        1,
+        2,
+        3
+      ],
+      "expected": [
+        1,
+        2,
+        3
+      ],
+      "code": "result = df['v'].to_list()",
+      "raw_chars": 40
+    },
+    {
+      "id": "ho_repeat_by",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'Expr' object has no attribute 'repeat'. Did you mean: 'repeat_by'?",
+      "expected": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "b",
+          "b"
+        ]
+      ],
+      "code": "result = df.with_columns(pl.col('v').repeat(pl.col('n'))).to_list()",
+      "raw_chars": 81
+    },
+    {
+      "id": "ho_list_get",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'Series' object has no attribute 'apply'",
+      "expected": [
+        20,
+        50
+      ],
+      "code": "result = df['xs'].apply(lambda x: x[1])",
+      "raw_chars": 53
+    },
+    {
+      "id": "ho_schema_names",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": "<bound method Schema.names of Schema({'p': Int64, 'q': String})>",
+      "expected": [
+        "p",
+        "q"
+      ],
+      "code": "result = df.schema.names",
+      "raw_chars": 38
+    },
+    {
+      "id": "ho_reshape",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'to_list'. Did you mean: 'to_dict'?",
+      "expected": [
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "code": "result = df.select(pl.col('v').cast(pl.Int64).cast(pl.List(pl.Int64))).to_list()",
+      "raw_chars": 94
+    },
+    {
+      "id": "ho_fold_sum",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'to_list'. Did you mean: 'to_dict'?",
+      "expected": [
+        111,
+        222
+      ],
+      "code": "result = df.select(pl.col('a') + pl.col('b') + pl.col('c')).to_list()",
+      "raw_chars": 83
+    },
+    {
+      "id": "ho_sum_horizontal",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'to_list'. Did you mean: 'to_dict'?",
+      "expected": [
+        6,
+        8
+      ],
+      "code": "result = df.select(pl.col('a') + pl.col('b')).to_list()",
+      "raw_chars": 69
+    },
+    {
+      "id": "ho_item_scalar",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": 42,
+      "expected": 42,
+      "code": "result = df['only'][0]",
+      "raw_chars": 36
+    },
+    {
+      "id": "h2_quantile",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": 3.0,
+      "expected": 3.0,
+      "code": "result = df.quantile(0.5).item()",
+      "raw_chars": 46
+    },
+    {
+      "id": "h2_quantile_25",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": 2.0,
+      "expected": 2.0,
+      "code": "result = df.quantile(0.25).to_series()[0]",
+      "raw_chars": 55
+    },
+    {
+      "id": "h2_variance",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'float' object has no attribute 'round'",
+      "expected": 4.0,
+      "code": "result = df.select(pl.col('v').var()).to_series()[0].round(3)",
+      "raw_chars": 75
+    },
+    {
+      "id": "h2_product",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": 24,
+      "expected": 24,
+      "code": "result = df.select(pl.col('v').product()).item()",
+      "raw_chars": 62
+    },
+    {
+      "id": "h2_sqrt",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        2.0,
+        3.0,
+        4.0
+      ],
+      "expected": [
+        2.0,
+        3.0,
+        4.0
+      ],
+      "code": "result = df['v'].sqrt().to_list()",
+      "raw_chars": 47
+    },
+    {
+      "id": "h2_corr",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'Expr' object has no attribute 'corr'",
+      "expected": 1.0,
+      "code": "result = df.select(pl.col('a').corr(pl.col('b'))).to_series()[0].round(2)",
+      "raw_chars": 87
+    },
+    {
+      "id": "h2_dot",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: module 'polars' has no attribute 'dot'",
+      "expected": 32,
+      "code": "result = df.select(pl.dot('a', 'b')).item()",
+      "raw_chars": 57
+    },
+    {
+      "id": "h2_min_horizontal",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'collect'",
+      "expected": [
+        1,
+        3
+      ],
+      "code": "result = df.select(pl.col('a').min().alias('min_value')).collect().to_list()",
+      "raw_chars": 90
+    },
+    {
+      "id": "h2_max_horizontal",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "SyntaxError: '(' was never closed",
+      "expected": [
+        5,
+        8
+      ],
+      "code": "result = df.select(pl.col('a').max().over(pl.all()).tolist() + df.select(pl.col('b').max().over(pl.all()).tolist())",
+      "raw_chars": 129
+    },
+    {
+      "id": "h2_is_not_null",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        true,
+        false,
+        true
+      ],
+      "expected": [
+        true,
+        false,
+        true
+      ],
+      "code": "result = df['v'].is_not_null().to_list()",
+      "raw_chars": 54
+    },
+    {
+      "id": "h2_has_nulls",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'is_null'. Did you mean: 'fill_null'?",
+      "expected": true,
+      "code": "result = df.is_null().any()",
+      "raw_chars": 41
+    },
+    {
+      "id": "h2_has_nulls_false",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'is_null'. Did you mean: 'fill_null'?",
+      "expected": false,
+      "code": "result = df.is_null().any()",
+      "raw_chars": 41
+    },
+    {
+      "id": "h2_fill_nan",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'Expr' object has no attribute 'fillna'. Did you mean: 'fill_nan'?",
+      "expected": [
+        1.0,
+        0.0,
+        3.0
+      ],
+      "code": "result = df.select(pl.col('v').fillna(0.0)).to_list()",
+      "raw_chars": 67
+    },
+    {
+      "id": "h2_drop_nans",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'to_list'. Did you mean: 'to_dict'?",
+      "expected": [
+        1.0,
+        3.0
+      ],
+      "code": "result = df.filter(pl.col('v').is_not_null()).select('v').to_list()",
+      "raw_chars": 81
+    },
+    {
+      "id": "h2_interpolate",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'to_list'. Did you mean: 'to_dict'?",
+      "expected": [
+        1.0,
+        2.0,
+        3.0
+      ],
+      "code": "result = df.select(pl.col('v').interpolate()).to_list()[0]",
+      "raw_chars": 72
+    },
+    {
+      "id": "h2_is_unique",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        {
+          "v": true,
+          "count": false
+        },
+        {
+          "v": false,
+          "count": true
+        }
+      ],
+      "expected": [
+        false,
+        true,
+        false
+      ],
+      "code": "result = df['v'].value_counts() == 1",
+      "raw_chars": 50
+    },
+    {
+      "id": "h2_value_counts_dict",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'groupby'. Did you mean: 'group_by'?",
+      "expected": {
+        "a": 2,
+        "b": 1
+      },
+      "code": "result = df.groupby('c').count().to_dict('records')[0]",
+      "raw_chars": 68
+    },
+    {
+      "id": "h2_is_empty",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": true,
+      "expected": true,
+      "code": "result = df.shape[0] == 0",
+      "raw_chars": 39
+    },
+    {
+      "id": "h2_is_empty_false",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": false,
+      "expected": false,
+      "code": "result = df.is_empty()",
+      "raw_chars": 36
+    },
+    {
+      "id": "h2_clear_height",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": 2,
+      "expected": 0,
+      "code": "result = df.clone().shape[0]",
+      "raw_chars": 42
+    },
+    {
+      "id": "h2_clone_equal",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "- instead of `s in [y, z]`, use `s.is_in([y, z])`",
+      "expected": true,
+      "code": "result = df.clone().to_dict() == df.to_dict()",
+      "raw_chars": 59
+    },
+    {
+      "id": "h2_dtypes_count",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'Expr' object has no attribute 'dtype'",
+      "expected": 2,
+      "code": "result = len(df.select(pl.col('a').dtype == pl.Int64).rows)",
+      "raw_chars": 73
+    },
+    {
+      "id": "h2_transpose_shape",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'tuple' object has no attribute 'tolist'",
+      "expected": [
+        2,
+        3
+      ],
+      "code": "result = df.shape.tolist()",
+      "raw_chars": 40
+    },
+    {
+      "id": "h2_to_struct",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": 1,
+      "expected": 1,
+      "code": "result = df.select(pl.struct(['a', 'b'])).shape[1]",
+      "raw_chars": 64
+    },
+    {
+      "id": "h2_limit",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'to_list'. Did you mean: 'to_dict'?",
+      "expected": [
+        10,
+        20
+      ],
+      "code": "result = df.select(pl.col('v').head(2)).to_list()",
+      "raw_chars": 63
+    },
+    {
+      "id": "h2_gather_every",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "SyntaxError: invalid syntax",
+      "expected": [
+        1,
+        3,
+        5
+      ],
+      "code": "result = df.select(pl.col('v').slice(0, 5:2)).to_list()",
+      "raw_chars": 69
+    },
+    {
+      "id": "h2_index_of",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'int' object has no attribute 'to_python'",
+      "expected": 2,
+      "code": "result = df.filter(pl.col('v') == 30).to_series().first().to_python()",
+      "raw_chars": 83
+    },
+    {
+      "id": "h2_search_sorted",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "ValueError: expected 1 values when selecting columns by boolean mask, got 4",
+      "expected": 2,
+      "code": "result = df[df['v'] > 25].shape[0]",
+      "raw_chars": 48
+    },
+    {
+      "id": "h2_remove_rows",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'to_list'. Did you mean: 'to_dict'?",
+      "expected": [
+        3,
+        4
+      ],
+      "code": "result = df.filter(pl.col('v') <= 5).to_list()",
+      "raw_chars": 60
+    },
+    {
+      "id": "h2_new_from_index",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'to_list'. Did you mean: 'to_dict'?",
+      "expected": [
+        20,
+        20,
+        20
+      ],
+      "code": "result = df.select('v').to_list()[1::3]",
+      "raw_chars": 53
+    },
+    {
+      "id": "h2_extend",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'to_list'. Did you mean: 'to_dict'?",
+      "expected": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "code": "result = df2.vstack(df).select('a').to_list()",
+      "raw_chars": 59
+    },
+    {
+      "id": "h2_merge_sorted",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [],
+      "expected": [
+        1,
+        2,
+        5,
+        6,
+        9
+      ],
+      "code": "result = df.join(df2, on='v', how='inner')['v'].to_list()",
+      "raw_chars": 71
+    },
+    {
+      "id": "h2_update",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'to_list'. Did you mean: 'to_dict'?",
+      "expected": [
+        10,
+        99,
+        30
+      ],
+      "code": "result = df.with_columns(pl.col('v').alias('v_list')).sort(by='id').select('v_list').to_list()",
+      "raw_chars": 108
+    },
+    {
+      "id": "h2_unpivot",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "polars.exceptions.InvalidOperationError: `explode` operation not supported for dtype `i64`",
+      "expected": 4,
+      "code": "result = df.explode(['a', 'b']).shape[0]",
+      "raw_chars": 54
+    },
+    {
+      "id": "h2_replace_strict",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'Expr' object has no attribute 'map'. Did you mean: 'max'?",
+      "expected": [
+        1,
+        2,
+        1
+      ],
+      "code": "result = df.with_columns(pl.col('c').map({ 'a': 1, 'b': 2 })).select('c').to_list()",
+      "raw_chars": 97
+    },
+    {
+      "id": "h2_cut_labels",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'Expr' object has no attribute 'apply'",
+      "expected": [
+        "low",
+        "high",
+        "low"
+      ],
+      "code": "result = df.with_columns(pl.col('v').apply(lambda x: 'low' if x < 5 else 'high')).select('v').unique().to_list()",
+      "raw_chars": 126
+    },
+    {
+      "id": "h2_ewm_mean",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "SyntaxError: '(' was never closed",
+      "expected": [
+        1.0,
+        1.667,
+        2.429
+      ],
+      "code": "result = df.with_column(pl.col('v').ewm(alpha=0.5, adjust=False).mean().round(3).to_list()",
+      "raw_chars": 104
+    },
+    {
+      "id": "h2_log",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'to_list'. Did you mean: 'to_dict'?",
+      "expected": [
+        0.0,
+        1.0
+      ],
+      "code": "result = df.select(pl.col('v').log().round(3)).to_list()",
+      "raw_chars": 70
+    },
+    {
+      "id": "h2_scatter",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'Expr' object has no attribute 'to_list'",
+      "expected": [
+        10,
+        99,
+        30
+      ],
+      "code": "result = df.select(pl.col('v').slice(1, 2).to_list())",
+      "raw_chars": 67
+    },
+    {
+      "id": "h2_to_physical",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        "a",
+        "b",
+        "a"
+      ],
+      "expected": [
+        0,
+        1,
+        0
+      ],
+      "code": "result = df['c'].to_list()",
+      "raw_chars": 40
+    },
+    {
+      "id": "h2_eq_missing",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'to_list'. Did you mean: 'to_dict'?",
+      "expected": [
+        true,
+        true
+      ],
+      "code": "result = df.select(pl.col('a') == pl.col('b')).to_list()",
+      "raw_chars": 70
+    },
+    {
+      "id": "h2_ne_missing",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'to_list'. Did you mean: 'to_dict'?",
+      "expected": [
+        true,
+        false
+      ],
+      "code": "result = df.select(pl.col('a') != pl.col('b')).to_list()",
+      "raw_chars": 70
+    },
+    {
+      "id": "h2_iter_rows",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": 6,
+      "expected": 6,
+      "code": "result = df.select(pl.sum('v')).item()",
+      "raw_chars": 52
+    },
+    {
+      "id": "h2_collect_schema_names",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'list' object has no attribute 'tolist'",
+      "expected": [
+        "p",
+        "q"
+      ],
+      "code": "result = df.columns.tolist()",
+      "raw_chars": 42
+    },
+    {
+      "id": "h2_set_sorted_max",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'iat'",
+      "expected": 9,
+      "code": "result = df.sort(by='v').tail(1).iat[0]",
+      "raw_chars": 53
+    },
+    {
+      "id": "h2_lazy_filter",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'to_list'. Did you mean: 'to_dict'?",
+      "expected": [
+        3,
+        5
+      ],
+      "code": "result = df.lazy().filter(pl.col('v') > 2).select(pl.col('v')).collect().to_list()",
+      "raw_chars": 96
+    },
+    {
+      "id": "h2_lazy_select",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        "a"
+      ],
+      "expected": [
+        "a"
+      ],
+      "code": "result = df.lazy().select('a').columns",
+      "raw_chars": 52
+    },
+    {
+      "id": "h2_rolling_sum",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "TypeError: DataFrame.rolling() got an unexpected keyword argument 'window'",
+      "expected": [
+        null,
+        3,
+        5,
+        7
+      ],
+      "code": "result = df.rolling(window=2, include_min=True).sum().alias('rolling_sum')",
+      "raw_chars": 88
+    },
+    {
+      "id": "h2_rolling_min",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "TypeError: DataFrame.rolling() got an unexpected keyword argument 'window'",
+      "expected": [
+        null,
+        2,
+        2,
+        1
+      ],
+      "code": "result = df.rolling(window=2, min_periods=1).min()",
+      "raw_chars": 64
+    },
+    {
+      "id": "h2_str_zfill",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        "0007",
+        "0042"
+      ],
+      "expected": [
+        "0007",
+        "0042"
+      ],
+      "code": "result = df['s'].str.zfill(4).to_list()",
+      "raw_chars": 53
+    },
+    {
+      "id": "h2_str_count_matches",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'StringNameSpace' object has no attribute 'count'. Did you mean: 'concat'?",
+      "expected": [
+        3,
+        0
+      ],
+      "code": "result = df['s'].str.count('a').tolist()",
+      "raw_chars": 54
+    },
+    {
+      "id": "h2_str_reverse",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'Series' object has no attribute 'apply'",
+      "expected": [
+        "cba",
+        "yx"
+      ],
+      "code": "result = df['s'].apply(lambda x: x[::-1]).to_list()",
+      "raw_chars": 65
+    },
+    {
+      "id": "h2_str_to_titlecase",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'ExprStringNameSpace' object has no attribute 'title'. Did you mean: 'tail'?",
+      "expected": [
+        "Hello World"
+      ],
+      "code": "result = df.select(pl.col('s').str.title()).to_list()[0]",
+      "raw_chars": 70
+    },
+    {
+      "id": "h2_list_contains",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'Series' object has no attribute 'apply'",
+      "expected": [
+        true,
+        false
+      ],
+      "code": "result = df['xs'].apply(lambda x: 2 in x)",
+      "raw_chars": 55
+    },
+    {
+      "id": "h2_agg_quantile",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'groupby'. Did you mean: 'group_by'?",
+      "expected": {
+        "a": 3.0,
+        "b": 7.0
+      },
+      "code": "result = df.groupby('g')['v'].quantile(0.50).to_dict()",
+      "raw_chars": 68
+    },
+    {
+      "id": "h2_agg_first_last",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'groupby'. Did you mean: 'group_by'?",
+      "expected": {
+        "a": [
+          1,
+          2
+        ],
+        "b": [
+          9,
+          9
+        ]
+      },
+      "code": "result = df.groupby('g').agg(pl.col('v').first().alias('first_v'), pl.col('v').last().alias('last_v')).to_dict('records')",
+      "raw_chars": 135
+    },
+    {
+      "id": "h2_cast_string",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'to_list'. Did you mean: 'to_dict'?",
+      "expected": [
+        "1",
+        "22"
+      ],
+      "code": "result = df.select('n').to_list()",
+      "raw_chars": 47
+    },
+    {
+      "id": "h2_estimated_rows",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": 3,
+      "expected": 3,
+      "code": "result = df.shape[0]",
+      "raw_chars": 34
+    },
+    {
+      "id": "h2_select_all_exclude",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'list' object has no attribute 'contains'",
+      "expected": [
+        "keep1",
+        "keep2"
+      ],
+      "code": "result = df.columns[~df.columns.contains('drop_me')]",
+      "raw_chars": 66
+    }
+  ]
+}

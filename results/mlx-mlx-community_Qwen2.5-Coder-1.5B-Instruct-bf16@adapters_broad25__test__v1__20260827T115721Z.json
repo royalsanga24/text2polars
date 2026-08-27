@@ -1,0 +1,1276 @@
+{
+  "model": "mlx:mlx-community/Qwen2.5-Coder-1.5B-Instruct-bf16@adapters/broad25",
+  "prompt": "v1",
+  "note": "held-out 88",
+  "tasks": "test",
+  "task_set_hash": "bf9b938ab249",
+  "n_tasks": 88,
+  "timestamp": "20260827T115721Z",
+  "overall": 0.3068181818181818,
+  "by_category": {
+    "held_out": 0.3068181818181818
+  },
+  "elapsed_seconds": 75.06529712677002,
+  "median_chars": 47,
+  "runaway": 0,
+  "records": [
+    {
+      "id": "ho_to_dict",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        {
+          "a": 1,
+          "b": "x"
+        },
+        {
+          "a": 2,
+          "b": "y"
+        }
+      ],
+      "expected": {
+        "a": [
+          1,
+          2
+        ],
+        "b": [
+          "x",
+          "y"
+        ]
+      },
+      "code": "result = df.to_dicts()",
+      "raw_chars": 22
+    },
+    {
+      "id": "ho_rows",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        {
+          "a": 1,
+          "b": 3
+        },
+        {
+          "a": 2,
+          "b": 4
+        }
+      ],
+      "expected": [
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          4
+        ]
+      ],
+      "code": "result = df.to_dicts()",
+      "raw_chars": 22
+    },
+    {
+      "id": "ho_row_single",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "polars.exceptions.ColumnNotFoundError: \"row_index\" not found",
+      "expected": [
+        2,
+        "y"
+      ],
+      "code": "result = df['row_index'].to_list()",
+      "raw_chars": 34
+    },
+    {
+      "id": "ho_to_series",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        "only"
+      ],
+      "expected": [
+        4,
+        5,
+        6
+      ],
+      "code": "result = df.columns",
+      "raw_chars": 19
+    },
+    {
+      "id": "ho_get_column",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        9,
+        8
+      ],
+      "expected": [
+        9,
+        8
+      ],
+      "code": "result = df['b'].to_list()",
+      "raw_chars": 26
+    },
+    {
+      "id": "ho_dtype_name",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": "Int64",
+      "expected": "Int64",
+      "code": "result = df['a'].dtype",
+      "raw_chars": 22
+    },
+    {
+      "id": "ho_equals",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'all'",
+      "expected": true,
+      "code": "result = df.join(df2, on='a', how='semi').all()",
+      "raw_chars": 47
+    },
+    {
+      "id": "ho_equals_false",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'all'",
+      "expected": false,
+      "code": "result = df.join(df2, on='a', how='semi').all()",
+      "raw_chars": 47
+    },
+    {
+      "id": "ho_is_sorted",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "SyntaxError: '(' was never closed",
+      "expected": true,
+      "code": "result = bool((df['v'].is_sorted())",
+      "raw_chars": 35
+    },
+    {
+      "id": "ho_is_sorted_false",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "SyntaxError: '(' was never closed",
+      "expected": false,
+      "code": "result = bool((df['v'].is_sorted())",
+      "raw_chars": 35
+    },
+    {
+      "id": "ho_reverse",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        3,
+        2,
+        1
+      ],
+      "expected": [
+        3,
+        2,
+        1
+      ],
+      "code": "result = df['v'].reverse()",
+      "raw_chars": 26
+    },
+    {
+      "id": "ho_last_value",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'Series' object has no attribute 'final_value'",
+      "expected": 9,
+      "code": "result = int(df['v'].final_value())",
+      "raw_chars": 35
+    },
+    {
+      "id": "ho_first_value_expr",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": 7,
+      "expected": 7,
+      "code": "result = int(df['v'].first())",
+      "raw_chars": 29
+    },
+    {
+      "id": "ho_exclude",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        "a",
+        "c"
+      ],
+      "expected": [
+        "a",
+        "c"
+      ],
+      "code": "result = df.drop('b').columns",
+      "raw_chars": 29
+    },
+    {
+      "id": "ho_sort_by",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        "p",
+        "r",
+        "q"
+      ],
+      "expected": [
+        "q",
+        "r",
+        "p"
+      ],
+      "code": "result = df.sort('score', descending=True).head(10)['name'].to_list()",
+      "raw_chars": 69
+    },
+    {
+      "id": "ho_is_null_mask",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        false,
+        true,
+        false
+      ],
+      "expected": [
+        false,
+        true,
+        false
+      ],
+      "code": "result = df.with_columns(pl.col('v').is_null().alias('o'))['o'].to_list()",
+      "raw_chars": 73
+    },
+    {
+      "id": "ho_count_non_null",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": 3,
+      "expected": 2,
+      "code": "result = int(df['v'].n_unique())",
+      "raw_chars": 32
+    },
+    {
+      "id": "ho_vstack",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        1,
+        2,
+        3
+      ],
+      "expected": [
+        1,
+        2,
+        3
+      ],
+      "code": "result = pl.concat([df, df2])['a'].to_list()",
+      "raw_chars": 44
+    },
+    {
+      "id": "ho_extend_series",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "TypeError: cannot select elements using Sequence with elements of type 'str'",
+      "expected": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "code": "result = pl.concat([s1, s2])['x'].to_list()",
+      "raw_chars": 43
+    },
+    {
+      "id": "ho_to_frame_columns",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        "speed"
+      ],
+      "expected": [
+        "speed"
+      ],
+      "code": "result = pl.DataFrame(s).columns",
+      "raw_chars": 32
+    },
+    {
+      "id": "ho_struct_unnest",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'Expr' object has no attribute 'join'",
+      "expected": [
+        "a",
+        "b"
+      ],
+      "code": "result = df.with_columns(pl.col('a').join(pl.col('b'), on='pair', how='concatenate').alias('o'))['o'].to_list()",
+      "raw_chars": 111
+    },
+    {
+      "id": "ho_implode",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'Expr' object has no attribute 'to_list'",
+      "expected": [
+        1,
+        2,
+        3
+      ],
+      "code": "result = df.with_columns(pl.col('v').to_list())",
+      "raw_chars": 47
+    },
+    {
+      "id": "ho_repeat_by",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'Expr' object has no attribute 'repeat'. Did you mean: 'repeat_by'?",
+      "expected": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "b",
+          "b"
+        ]
+      ],
+      "code": "result = df.with_columns(pl.col('v').repeat(int(df['n'].to_list())).alias('o'))['o'].to_list()",
+      "raw_chars": 94
+    },
+    {
+      "id": "ho_list_get",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "If you want expression: col(\"xs\").gather(1) to be broadcasted, ensure it is a scalar (for instance by adding '.first()').",
+      "expected": [
+        20,
+        50
+      ],
+      "code": "result = df.with_columns(pl.col('xs').gather(1).alias('o'))['o'].to_list()",
+      "raw_chars": 74
+    },
+    {
+      "id": "ho_schema_names",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        "p",
+        "q"
+      ],
+      "expected": [
+        "p",
+        "q"
+      ],
+      "code": "result = df.columns",
+      "raw_chars": 19
+    },
+    {
+      "id": "ho_reshape",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'Expr' object has no attribute 'split'",
+      "expected": [
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "code": "result = df.group_by('r').agg(pl.col('v').split(3).alias('o'))['o'].to_list()",
+      "raw_chars": 77
+    },
+    {
+      "id": "ho_fold_sum",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        111,
+        222
+      ],
+      "expected": [
+        111,
+        222
+      ],
+      "code": "result = df.with_columns((pl.col('a') + pl.col('b') + pl.col('c')).alias('o'))['o'].to_list()",
+      "raw_chars": 93
+    },
+    {
+      "id": "ho_sum_horizontal",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        6,
+        8
+      ],
+      "expected": [
+        6,
+        8
+      ],
+      "code": "result = df.with_columns((pl.col('a') + pl.col('b')).alias('o'))['o'].to_list()",
+      "raw_chars": 79
+    },
+    {
+      "id": "ho_item_scalar",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": 1,
+      "expected": 42,
+      "code": "result = df.height",
+      "raw_chars": 18
+    },
+    {
+      "id": "h2_quantile",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "SyntaxError: '(' was never closed",
+      "expected": 3.0,
+      "code": "result = round(float(df['v'].percentile(50), 2)",
+      "raw_chars": 47
+    },
+    {
+      "id": "h2_quantile_25",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": 2,
+      "expected": 2.0,
+      "code": "result = int(df['v'].quantile(0.25))",
+      "raw_chars": 36
+    },
+    {
+      "id": "h2_variance",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": 4.0,
+      "expected": 4.0,
+      "code": "result = round(float(df['v'].var()), 3)",
+      "raw_chars": 39
+    },
+    {
+      "id": "h2_product",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": 24,
+      "expected": 24,
+      "code": "result = int(df['v'].product())",
+      "raw_chars": 31
+    },
+    {
+      "id": "h2_sqrt",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        2.0,
+        3.0,
+        4.0
+      ],
+      "expected": [
+        2.0,
+        3.0,
+        4.0
+      ],
+      "code": "result = df.with_columns(pl.col('v').sqrt().alias('o'))['o'].to_list()",
+      "raw_chars": 70
+    },
+    {
+      "id": "h2_corr",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'Series' object has no attribute 'corr'",
+      "expected": 1.0,
+      "code": "result = round(float(df['a'].corr(float(df['b']))), 2)",
+      "raw_chars": 54
+    },
+    {
+      "id": "h2_dot",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "SyntaxError: '(' was never closed",
+      "expected": 32,
+      "code": "result = int(df['a'].dot(df['b'].to_list())",
+      "raw_chars": 43
+    },
+    {
+      "id": "h2_min_horizontal",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        1,
+        1
+      ],
+      "expected": [
+        1,
+        3
+      ],
+      "code": "result = df.with_columns(pl.col('a').min().alias('o'))['o'].to_list()",
+      "raw_chars": 69
+    },
+    {
+      "id": "h2_max_horizontal",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        8,
+        8
+      ],
+      "expected": [
+        5,
+        8
+      ],
+      "code": "result = df.with_columns(pl.col('a').max().alias('o'))['o'].to_list()",
+      "raw_chars": 69
+    },
+    {
+      "id": "h2_is_not_null",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        true,
+        false,
+        true
+      ],
+      "expected": [
+        true,
+        false,
+        true
+      ],
+      "code": "result = df.with_columns(pl.col('v').is_not_null().alias('o'))['o'].to_list()",
+      "raw_chars": 77
+    },
+    {
+      "id": "h2_has_nulls",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "SyntaxError: '(' was never closed",
+      "expected": true,
+      "code": "result = bool((df['v'].null_count())",
+      "raw_chars": 36
+    },
+    {
+      "id": "h2_has_nulls_false",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "SyntaxError: '(' was never closed",
+      "expected": false,
+      "code": "result = bool((df['v'].null_count())",
+      "raw_chars": 36
+    },
+    {
+      "id": "h2_fill_nan",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        1.0,
+        NaN,
+        3.0
+      ],
+      "expected": [
+        1.0,
+        0.0,
+        3.0
+      ],
+      "code": "result = df.with_columns(pl.col('v').fill_null(0.0))['v'].to_list()",
+      "raw_chars": 67
+    },
+    {
+      "id": "h2_drop_nans",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        1.0,
+        NaN,
+        3.0
+      ],
+      "expected": [
+        1.0,
+        3.0
+      ],
+      "code": "result = df.drop_nulls('v')['v'].to_list()",
+      "raw_chars": 42
+    },
+    {
+      "id": "h2_interpolate",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "ValueError: `strategy` must be one of {'forward', 'backward', 'min', 'max', 'mean', 'zero', 'one'}, got linear",
+      "expected": [
+        1.0,
+        2.0,
+        3.0
+      ],
+      "code": "result = df.with_columns(pl.col('v').fill_null(strategy='linear'))['v'].to_list()",
+      "raw_chars": 81
+    },
+    {
+      "id": "h2_is_unique",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        false,
+        true,
+        false
+      ],
+      "expected": [
+        false,
+        true,
+        false
+      ],
+      "code": "result = df.with_columns(pl.col('v').is_unique().alias('o'))['o'].to_list()",
+      "raw_chars": 75
+    },
+    {
+      "id": "h2_value_counts_dict",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": {
+        "a": 3,
+        "b": 3
+      },
+      "expected": {
+        "a": 2,
+        "b": 1
+      },
+      "code": "result = {x: df['c'].count() for x in set(df['c'].unique().to_list())}",
+      "raw_chars": 70
+    },
+    {
+      "id": "h2_is_empty",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": 0,
+      "expected": true,
+      "code": "result = df.height",
+      "raw_chars": 18
+    },
+    {
+      "id": "h2_is_empty_false",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": 1,
+      "expected": false,
+      "code": "result = df.height",
+      "raw_chars": 18
+    },
+    {
+      "id": "h2_clear_height",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'copy'",
+      "expected": 0,
+      "code": "result = df.copy()",
+      "raw_chars": 18
+    },
+    {
+      "id": "h2_clone_equal",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'copy'",
+      "expected": true,
+      "code": "result = df.copy()",
+      "raw_chars": 18
+    },
+    {
+      "id": "h2_dtypes_count",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": 3,
+      "expected": 2,
+      "code": "result = len(df.columns)",
+      "raw_chars": 24
+    },
+    {
+      "id": "h2_transpose_shape",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        2,
+        3
+      ],
+      "expected": [
+        2,
+        3
+      ],
+      "code": "result = df.transpose().shape",
+      "raw_chars": 29
+    },
+    {
+      "id": "h2_to_struct",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'Expr' object has no attribute 'join'",
+      "expected": 1,
+      "code": "result = df.with_columns(pl.col('a').join(pl.col('b')).alias('o'))['o'].to_int()",
+      "raw_chars": 80
+    },
+    {
+      "id": "h2_limit",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        10,
+        20
+      ],
+      "expected": [
+        10,
+        20
+      ],
+      "code": "result = df.head(2)['v'].to_list()",
+      "raw_chars": 34
+    },
+    {
+      "id": "h2_gather_every",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'Expr' object has no attribute 'every'. Did you mean: 'over'?",
+      "expected": [
+        1,
+        3,
+        5
+      ],
+      "code": "result = df.filter(pl.col('v').every(2).alias('o'))['o'].to_list()",
+      "raw_chars": 66
+    },
+    {
+      "id": "h2_index_of",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "SyntaxError: '(' was never closed",
+      "expected": 2,
+      "code": "result = int(df['v'].arg_first(30)",
+      "raw_chars": 34
+    },
+    {
+      "id": "h2_search_sorted",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "TypeError: Expr.arg_sort() takes 1 positional argument but 2 were given",
+      "expected": 2,
+      "code": "result = int(df['v'].arg_sort(25) + 1)",
+      "raw_chars": 38
+    },
+    {
+      "id": "h2_remove_rows",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "polars.exceptions.InvalidOperationError: expr `[(col(\"v\")) > (dyn int: 5)]` is not a selector",
+      "expected": [
+        3,
+        4
+      ],
+      "code": "result = df.drop(pl.col('v') > 5)['v'].to_list()",
+      "raw_chars": 48
+    },
+    {
+      "id": "h2_new_from_index",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'Expr' object has no attribute 'copy'",
+      "expected": [
+        20,
+        20,
+        20
+      ],
+      "code": "result = df.with_columns(pl.col('v').copy(3).alias('o'))['o'].to_list()",
+      "raw_chars": 71
+    },
+    {
+      "id": "h2_extend",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "code": "result = pl.concat([df, df2])['a'].to_list()",
+      "raw_chars": 44
+    },
+    {
+      "id": "h2_merge_sorted",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        1,
+        5,
+        9,
+        2,
+        6
+      ],
+      "expected": [
+        1,
+        2,
+        5,
+        6,
+        9
+      ],
+      "code": "result = pl.concat([df, df2])['v'].to_list()",
+      "raw_chars": 44
+    },
+    {
+      "id": "h2_update",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        20
+      ],
+      "expected": [
+        10,
+        99,
+        30
+      ],
+      "code": "result = df.join(df2, on='id', how='semi').sort('id')['v'].to_list()",
+      "raw_chars": 68
+    },
+    {
+      "id": "h2_unpivot",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        {
+          "a": 1,
+          "b": 3
+        },
+        {
+          "a": 2,
+          "b": 4
+        }
+      ],
+      "expected": 4,
+      "code": "result = df.to_dicts()",
+      "raw_chars": 22
+    },
+    {
+      "id": "h2_replace_strict",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'Expr' object has no attribute 'map'. Did you mean: 'max'?",
+      "expected": [
+        1,
+        2,
+        1
+      ],
+      "code": "result = df.with_columns(pl.col('c').map({a: 1, b: 2})).to_list()",
+      "raw_chars": 65
+    },
+    {
+      "id": "h2_cut_labels",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        "low",
+        "high",
+        "low"
+      ],
+      "expected": [
+        "low",
+        "high",
+        "low"
+      ],
+      "code": "result = df.with_columns(pl.when(pl.col('v') < 5).then(pl.lit('low')).otherwise(pl.lit('high')).alias('o'))['o'].to_list()",
+      "raw_chars": 122
+    },
+    {
+      "id": "h2_ewm_mean",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'Expr' object has no attribute 'ew_mean'. Did you mean: 'ewm_mean'?",
+      "expected": [
+        1.0,
+        1.667,
+        2.429
+      ],
+      "code": "result = df.with_columns(pl.col('v').ew_mean().round(3))['v'].to_list()",
+      "raw_chars": 71
+    },
+    {
+      "id": "h2_log",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "polars.exceptions.ColumnNotFoundError: \"o\" not found",
+      "expected": [
+        0.0,
+        1.0
+      ],
+      "code": "result = df.with_columns(pl.col('v').log(3))['o'].to_list()",
+      "raw_chars": 59
+    },
+    {
+      "id": "h2_scatter",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'set_value'",
+      "expected": [
+        10,
+        99,
+        30
+      ],
+      "code": "result = df.set_value(1, 'v', 99)",
+      "raw_chars": 33
+    },
+    {
+      "id": "h2_to_physical",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'Expr' object has no attribute 'codes'. Did you mean: 'mode'?",
+      "expected": [
+        0,
+        1,
+        0
+      ],
+      "code": "result = df.with_columns(pl.col('c').codes().alias('o'))['o'].to_list()",
+      "raw_chars": 71
+    },
+    {
+      "id": "h2_eq_missing",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'Expr' object has no attribute 'compare'",
+      "expected": [
+        true,
+        true
+      ],
+      "code": "result = df.with_columns(pl.col('a').compare(pl.col('b'), how='element-wise').alias('o'))['o'].to_list()",
+      "raw_chars": 104
+    },
+    {
+      "id": "h2_ne_missing",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'to_list'. Did you mean: 'to_dict'?",
+      "expected": [
+        true,
+        false
+      ],
+      "code": "result = df.with_columns(pl.col('a') != pl.col('b')).to_list()",
+      "raw_chars": 62
+    },
+    {
+      "id": "h2_iter_rows",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": 6,
+      "expected": 6,
+      "code": "result = int(df['v'].sum())",
+      "raw_chars": 27
+    },
+    {
+      "id": "h2_collect_schema_names",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        "p",
+        "q"
+      ],
+      "expected": [
+        "p",
+        "q"
+      ],
+      "code": "result = df.columns",
+      "raw_chars": 19
+    },
+    {
+      "id": "h2_set_sorted_max",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": 9,
+      "expected": 9,
+      "code": "result = int(df['v'].max())",
+      "raw_chars": 27
+    },
+    {
+      "id": "h2_lazy_filter",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        3,
+        5
+      ],
+      "expected": [
+        3,
+        5
+      ],
+      "code": "result = df.filter(pl.col('v') > 2)['v'].to_list()",
+      "raw_chars": 50
+    },
+    {
+      "id": "h2_lazy_select",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "polars.exceptions.InvalidOperationError: 'is_in' cannot check for List(String) values in Int64 data",
+      "expected": [
+        "a"
+      ],
+      "code": "result = df.filter(pl.col('a').is_in(['a']))['a'].to_list()",
+      "raw_chars": 59
+    },
+    {
+      "id": "h2_rolling_sum",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        1,
+        3,
+        6,
+        10
+      ],
+      "expected": [
+        null,
+        3,
+        5,
+        7
+      ],
+      "code": "result = df.with_columns(pl.col('v').cum_sum().alias('o'))['o'].to_list()",
+      "raw_chars": 73
+    },
+    {
+      "id": "h2_rolling_min",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        5,
+        2,
+        2,
+        1
+      ],
+      "expected": [
+        null,
+        2,
+        2,
+        1
+      ],
+      "code": "result = df.with_columns(pl.col('v').cum_min().alias('o'))['o'].to_list()",
+      "raw_chars": 73
+    },
+    {
+      "id": "h2_str_zfill",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'Expr' object has no attribute 'pad_left'",
+      "expected": [
+        "0007",
+        "0042"
+      ],
+      "code": "result = df.with_columns(pl.col('s').pad_left(4, '0').alias('o'))['o'].to_list()",
+      "raw_chars": 80
+    },
+    {
+      "id": "h2_str_count_matches",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        6,
+        4
+      ],
+      "expected": [
+        3,
+        0
+      ],
+      "code": "result = df.with_columns(pl.col('s').str.len_chars().alias('n'))['n'].to_list()",
+      "raw_chars": 79
+    },
+    {
+      "id": "h2_str_reverse",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'ExprStringNameSpace' object has no attribute 'rev'. Did you mean: 'reverse'?",
+      "expected": [
+        "cba",
+        "yx"
+      ],
+      "code": "result = df.with_columns(pl.col('s').str.rev().alias('o'))['o'].to_list()",
+      "raw_chars": 73
+    },
+    {
+      "id": "h2_str_to_titlecase",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'ExprStringNameSpace' object has no attribute 'to_title_case'. Did you mean: 'to_titlecase'?. Did you mean: 'to_titlecase'?",
+      "expected": [
+        "Hello World"
+      ],
+      "code": "result = df.with_columns(pl.col('s').str.to_title_case().alias('o'))['o'].to_list()",
+      "raw_chars": 83
+    },
+    {
+      "id": "h2_list_contains",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "SyntaxError: '(' was never closed",
+      "expected": [
+        true,
+        false
+      ],
+      "code": "result = df.with_columns(pl.col('xs').str.contains(2).to_list()",
+      "raw_chars": 63
+    },
+    {
+      "id": "h2_agg_quantile",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'Expr' object has no attribute 'percentile'",
+      "expected": {
+        "a": 3.0,
+        "b": 7.0
+      },
+      "code": "g = df.group_by('g').agg(pl.col('v').percentile(50).alias('r'))\nresult = dict(zip(g['g'].to_list(), g['r'].to_list()))",
+      "raw_chars": 118
+    },
+    {
+      "id": "h2_agg_first_last",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": {
+        "a": 1,
+        "b": 9
+      },
+      "expected": {
+        "a": [
+          1,
+          2
+        ],
+        "b": [
+          9,
+          9
+        ]
+      },
+      "code": "g = df.group_by('g').agg(pl.col('v').first().alias('r'))\nresult = dict(zip(g['g'].to_list(), g['r'].to_list()))",
+      "raw_chars": 111
+    },
+    {
+      "id": "h2_cast_string",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'ExprStringNameSpace' object has no attribute 'to_string'. Did you mean: 'to_integer'?",
+      "expected": [
+        "1",
+        "22"
+      ],
+      "code": "result = df.with_columns(pl.col('n').str.to_string())['result'].to_list()",
+      "raw_chars": 73
+    },
+    {
+      "id": "h2_estimated_rows",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": 3,
+      "expected": 3,
+      "code": "result = df.height",
+      "raw_chars": 18
+    },
+    {
+      "id": "h2_select_all_exclude",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        "keep1",
+        "keep2"
+      ],
+      "expected": [
+        "keep1",
+        "keep2"
+      ],
+      "code": "result = df.drop('drop_me').columns",
+      "raw_chars": 35
+    }
+  ]
+}

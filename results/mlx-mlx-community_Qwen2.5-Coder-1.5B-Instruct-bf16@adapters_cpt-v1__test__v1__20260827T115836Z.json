@@ -1,0 +1,1337 @@
+{
+  "model": "mlx:mlx-community/Qwen2.5-Coder-1.5B-Instruct-bf16@adapters/cpt-v1",
+  "prompt": "v1",
+  "note": "held-out 88",
+  "tasks": "test",
+  "task_set_hash": "bf9b938ab249",
+  "n_tasks": 88,
+  "timestamp": "20260827T115836Z",
+  "overall": 0.3522727272727273,
+  "by_category": {
+    "held_out": 0.3522727272727273
+  },
+  "elapsed_seconds": 74.4912519454956,
+  "median_chars": 63,
+  "runaway": 0,
+  "records": [
+    {
+      "id": "ho_to_dict",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": {
+        "a": [
+          1,
+          2
+        ],
+        "b": [
+          "x",
+          "y"
+        ]
+      },
+      "expected": {
+        "a": [
+          1,
+          2
+        ],
+        "b": [
+          "x",
+          "y"
+        ]
+      },
+      "code": "result = df.to_dict(as_series=False)",
+      "raw_chars": 46
+    },
+    {
+      "id": "ho_rows",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": [
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          4
+        ]
+      ],
+      "code": "[[1, 3], [2, 4]]",
+      "raw_chars": 16
+    },
+    {
+      "id": "ho_row_single",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": [
+        2,
+        "y"
+      ],
+      "code": "[1, 'y']",
+      "raw_chars": 8
+    },
+    {
+      "id": "ho_to_series",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'to_list'. Did you mean: 'to_dict'?",
+      "expected": [
+        4,
+        5,
+        6
+      ],
+      "code": "result = df.to_list()",
+      "raw_chars": 31
+    },
+    {
+      "id": "ho_get_column",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        9,
+        8
+      ],
+      "expected": [
+        9,
+        8
+      ],
+      "code": "result = df[\"b\"].to_list()",
+      "raw_chars": 36
+    },
+    {
+      "id": "ho_dtype_name",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": "Int64",
+      "expected": "Int64",
+      "code": "result = df.schema[\"a\"]",
+      "raw_chars": 37
+    },
+    {
+      "id": "ho_equals",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": true,
+      "expected": true,
+      "code": "result = df.equals(df2)",
+      "raw_chars": 33
+    },
+    {
+      "id": "ho_equals_false",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": false,
+      "expected": false,
+      "code": "result = df.equals(df2)",
+      "raw_chars": 33
+    },
+    {
+      "id": "ho_is_sorted",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": true,
+      "expected": true,
+      "code": "result = df.select(pl.col(\"v\").is_sorted()).item()",
+      "raw_chars": 60
+    },
+    {
+      "id": "ho_is_sorted_false",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": false,
+      "expected": false,
+      "code": "result = df.select(pl.col(\"v\").is_sorted()).item()",
+      "raw_chars": 64
+    },
+    {
+      "id": "ho_reverse",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        3,
+        2,
+        1
+      ],
+      "expected": [
+        3,
+        2,
+        1
+      ],
+      "code": "result = df.select(pl.col(\"v\").reverse()).to_series().to_list()",
+      "raw_chars": 73
+    },
+    {
+      "id": "ho_last_value",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 9,
+      "code": "10",
+      "raw_chars": 2
+    },
+    {
+      "id": "ho_first_value_expr",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": 7,
+      "expected": 7,
+      "code": "result = df.select(pl.col(\"v\").first()).to_series().item()",
+      "raw_chars": 68
+    },
+    {
+      "id": "ho_exclude",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        "b",
+        "c"
+      ],
+      "expected": [
+        "a",
+        "c"
+      ],
+      "code": "result = df.columns[1:]",
+      "raw_chars": 33
+    },
+    {
+      "id": "ho_sort_by",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        "q",
+        "r",
+        "p"
+      ],
+      "expected": [
+        "q",
+        "r",
+        "p"
+      ],
+      "code": "result = df.sort(\"score\").to_series().to_list()",
+      "raw_chars": 57
+    },
+    {
+      "id": "ho_is_null_mask",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        {
+          "v": false
+        },
+        {
+          "v": true
+        },
+        {
+          "v": false
+        }
+      ],
+      "expected": [
+        false,
+        true,
+        false
+      ],
+      "code": "result = df.select(pl.col(\"v\").is_null())",
+      "raw_chars": 51
+    },
+    {
+      "id": "ho_count_non_null",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 2,
+      "code": "3",
+      "raw_chars": 1
+    },
+    {
+      "id": "ho_vstack",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "\t[1] 'with_columns'",
+      "expected": [
+        1,
+        2,
+        3
+      ],
+      "code": "result = df2.lazy().with_columns(pl.col(\"a\").list.get(0).alias(\"a\")).collect().to_series().to_list()",
+      "raw_chars": 110
+    },
+    {
+      "id": "ho_extend_series",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "code": "result = s1.append(s2).to_list()",
+      "raw_chars": 42
+    },
+    {
+      "id": "ho_to_frame_columns",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        "speed"
+      ],
+      "expected": [
+        "speed"
+      ],
+      "code": "result = s.to_frame().columns",
+      "raw_chars": 39
+    },
+    {
+      "id": "ho_struct_unnest",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": [
+        "a",
+        "b"
+      ],
+      "code": "['pair', 'a', 'b']",
+      "raw_chars": 18
+    },
+    {
+      "id": "ho_implode",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "polars.exceptions.InvalidOperationError: expected List data type for list operation, got: Int64",
+      "expected": [
+        1,
+        2,
+        3
+      ],
+      "code": "result = df.select(pl.col(\"v\").list.get(0)).to_series().to_list()",
+      "raw_chars": 75
+    },
+    {
+      "id": "ho_repeat_by",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        {
+          "v": "a"
+        },
+        {
+          "v": "b"
+        }
+      ],
+      "expected": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "b",
+          "b"
+        ]
+      ],
+      "code": "result = df.select(pl.col(\"v\").repeat_by(\"n\").list.get(0))",
+      "raw_chars": 68
+    },
+    {
+      "id": "ho_list_get",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        20,
+        50
+      ],
+      "expected": [
+        20,
+        50
+      ],
+      "code": "result = df.select(pl.col(\"xs\").list.get(1)).to_series().to_list()",
+      "raw_chars": 76
+    },
+    {
+      "id": "ho_schema_names",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": "<bound method Schema.names of Schema({'p': Int64, 'q': String})>",
+      "expected": [
+        "p",
+        "q"
+      ],
+      "code": "result = df.schema.names",
+      "raw_chars": 34
+    },
+    {
+      "id": "ho_reshape",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "TypeError: Expr.reshape() takes 2 positional arguments but 3 were given",
+      "expected": [
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "code": "result = df.select(pl.col(\"v\").list.eval(pl.element().reshape(2, 3).list.to_array()).alias(\"v\"))",
+      "raw_chars": 106
+    },
+    {
+      "id": "ho_fold_sum",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        111,
+        222
+      ],
+      "expected": [
+        111,
+        222
+      ],
+      "code": "result = df.select(pl.col(\"a\") + pl.col(\"b\") + pl.col(\"c\")).to_series().to_list()",
+      "raw_chars": 91
+    },
+    {
+      "id": "ho_sum_horizontal",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        6,
+        8
+      ],
+      "expected": [
+        6,
+        8
+      ],
+      "code": "result = df.select(pl.col(\"a\") + pl.col(\"b\")).to_series().to_list()",
+      "raw_chars": 77
+    },
+    {
+      "id": "ho_item_scalar",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 42,
+      "code": "42",
+      "raw_chars": 2
+    },
+    {
+      "id": "h2_quantile",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 3.0,
+      "code": "1.0",
+      "raw_chars": 3
+    },
+    {
+      "id": "h2_quantile_25",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 2.0,
+      "code": "1.0",
+      "raw_chars": 3
+    },
+    {
+      "id": "h2_variance",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 4.0,
+      "code": "0.667",
+      "raw_chars": 5
+    },
+    {
+      "id": "h2_product",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 24,
+      "code": "108",
+      "raw_chars": 3
+    },
+    {
+      "id": "h2_sqrt",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        2.0,
+        3.0,
+        4.0
+      ],
+      "expected": [
+        2.0,
+        3.0,
+        4.0
+      ],
+      "code": "result = df.select(pl.col(\"v\").sqrt()).to_series().to_list()",
+      "raw_chars": 74
+    },
+    {
+      "id": "h2_corr",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 1.0,
+      "code": "1.00",
+      "raw_chars": 4
+    },
+    {
+      "id": "h2_dot",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 32,
+      "code": "10",
+      "raw_chars": 2
+    },
+    {
+      "id": "h2_min_horizontal",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        1
+      ],
+      "expected": [
+        1,
+        3
+      ],
+      "code": "result = df.select(pl.col(\"a\").min().alias(\"a\"), pl.col(\"b\").min().alias(\"b\")).to_series().to_list()",
+      "raw_chars": 114
+    },
+    {
+      "id": "h2_max_horizontal",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        8
+      ],
+      "expected": [
+        5,
+        8
+      ],
+      "code": "result = df.select(pl.col(\"a\").max().alias(\"a\"), pl.col(\"b\").max().alias(\"b\")).to_series().to_list()",
+      "raw_chars": 114
+    },
+    {
+      "id": "h2_is_not_null",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        {
+          "v_not_null": true
+        },
+        {
+          "v_not_null": false
+        },
+        {
+          "v_not_null": true
+        }
+      ],
+      "expected": [
+        true,
+        false,
+        true
+      ],
+      "code": "result = df.select(pl.col(\"v\").is_not_null().alias(\"v_not_null\"))",
+      "raw_chars": 75
+    },
+    {
+      "id": "h2_has_nulls",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": true,
+      "expected": true,
+      "code": "result = df.select(pl.col(\"v\").is_null().any()).item()",
+      "raw_chars": 68
+    },
+    {
+      "id": "h2_has_nulls_false",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": false,
+      "expected": false,
+      "code": "result = df.select(pl.col(\"v\").is_null().any()).item()",
+      "raw_chars": 68
+    },
+    {
+      "id": "h2_fill_nan",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'Expr' object has no attribute 'to_list'",
+      "expected": [
+        1.0,
+        0.0,
+        3.0
+      ],
+      "code": "result = df.select(pl.col(\"v\").fill_null(0.0).to_list())",
+      "raw_chars": 66
+    },
+    {
+      "id": "h2_drop_nans",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        1.0,
+        3.0
+      ],
+      "expected": [
+        1.0,
+        3.0
+      ],
+      "code": "result = df.filter(pl.col(\"v\").is_not_nan()).to_series().to_list()",
+      "raw_chars": 76
+    },
+    {
+      "id": "h2_interpolate",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        1.0,
+        2.0,
+        3.0
+      ],
+      "expected": [
+        1.0,
+        2.0,
+        3.0
+      ],
+      "code": "result = df.select(pl.col(\"v\").interpolate(\"linear\")).to_series().to_list()",
+      "raw_chars": 85
+    },
+    {
+      "id": "h2_is_unique",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        {
+          "v": true
+        },
+        {
+          "v": true
+        },
+        {
+          "v": false
+        }
+      ],
+      "expected": [
+        false,
+        true,
+        false
+      ],
+      "code": "result = df.select(pl.col(\"v\").eq(1).cum_sum() == 1)",
+      "raw_chars": 62
+    },
+    {
+      "id": "h2_value_counts_dict",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": {
+        "c": [
+          "a",
+          "b"
+        ],
+        "len": [
+          2,
+          1
+        ]
+      },
+      "expected": {
+        "a": 2,
+        "b": 1
+      },
+      "code": "result = df.group_by(\"c\").len().to_dict(as_series=False)",
+      "raw_chars": 66
+    },
+    {
+      "id": "h2_is_empty",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": true,
+      "expected": true,
+      "code": "result = df.height == 0",
+      "raw_chars": 37
+    },
+    {
+      "id": "h2_is_empty_false",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": false,
+      "expected": false,
+      "code": "result = df.height == 0",
+      "raw_chars": 37
+    },
+    {
+      "id": "h2_clear_height",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 0,
+      "code": "1",
+      "raw_chars": 1
+    },
+    {
+      "id": "h2_clone_equal",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": true,
+      "expected": true,
+      "code": "result = df.equals(df.clone())",
+      "raw_chars": 40
+    },
+    {
+      "id": "h2_dtypes_count",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 2,
+      "code": "3",
+      "raw_chars": 1
+    },
+    {
+      "id": "h2_transpose_shape",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": [
+        2,
+        3
+      ],
+      "code": "[2, 2]",
+      "raw_chars": 6
+    },
+    {
+      "id": "h2_to_struct",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 1,
+      "code": "3",
+      "raw_chars": 1
+    },
+    {
+      "id": "h2_limit",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        10,
+        20
+      ],
+      "expected": [
+        10,
+        20
+      ],
+      "code": "result = df.select(pl.col(\"v\").head(2)).to_series().to_list()",
+      "raw_chars": 71
+    },
+    {
+      "id": "h2_gather_every",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "polars.exceptions.InvalidOperationError: expected Array datatype for array operation, got: Int64",
+      "expected": [
+        1,
+        3,
+        5
+      ],
+      "code": "result = df.select(pl.col(\"v\").arr.get(pl.col(\"v\").arr.len() // 2)).to_series().to_list()",
+      "raw_chars": 99
+    },
+    {
+      "id": "h2_index_of",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 2,
+      "code": "3",
+      "raw_chars": 1
+    },
+    {
+      "id": "h2_search_sorted",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 2,
+      "code": "3",
+      "raw_chars": 1
+    },
+    {
+      "id": "h2_remove_rows",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        3,
+        4
+      ],
+      "expected": [
+        3,
+        4
+      ],
+      "code": "result = df.filter(pl.col(\"v\") <= 5).to_series().to_list()",
+      "raw_chars": 72
+    },
+    {
+      "id": "h2_new_from_index",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "TypeError: ExprListNameSpace.get() takes 2 positional arguments but 3 were given",
+      "expected": [
+        20,
+        20,
+        20
+      ],
+      "code": "result = df.select(pl.col(\"v\").list.get(1).list.get(0, 2))",
+      "raw_chars": 68
+    },
+    {
+      "id": "h2_extend",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'append'",
+      "expected": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "code": "result = df2.append(df, in_place=True)['a'].to_list()",
+      "raw_chars": 63
+    },
+    {
+      "id": "h2_merge_sorted",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'to_list'. Did you mean: 'to_dict'?",
+      "expected": [
+        1,
+        2,
+        5,
+        6,
+        9
+      ],
+      "code": "result = df.join_asof(df2, on=\"v\", strategy=\"forward\").select(\"v\").to_list()",
+      "raw_chars": 86
+    },
+    {
+      "id": "h2_update",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        10,
+        20,
+        30
+      ],
+      "expected": [
+        10,
+        99,
+        30
+      ],
+      "code": "result = df.join_asof(df2, on=\"id\", strategy=\"forward\").sort(\"id\")[\"v\"].to_list()",
+      "raw_chars": 91
+    },
+    {
+      "id": "h2_unpivot",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 4,
+      "code": "1",
+      "raw_chars": 1
+    },
+    {
+      "id": "h2_replace_strict",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        1,
+        2,
+        1
+      ],
+      "expected": [
+        1,
+        2,
+        1
+      ],
+      "code": "result = df.select(pl.col(\"c\").map_elements(lambda x: 1 if x == \"a\" else 2)).to_series().to_list()",
+      "raw_chars": 112
+    },
+    {
+      "id": "h2_cut_labels",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        {
+          "v": "low"
+        },
+        {
+          "v": "high"
+        },
+        {
+          "v": "low"
+        }
+      ],
+      "expected": [
+        "low",
+        "high",
+        "low"
+      ],
+      "code": "result = df.select(pl.col(\"v\").map_elements(lambda x: \"low\" if x < 5 else \"high\", return_dtype=pl.String))",
+      "raw_chars": 116
+    },
+    {
+      "id": "h2_ewm_mean",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        1.0,
+        1.6666666666666665,
+        2.4285714285714284
+      ],
+      "expected": [
+        1.0,
+        1.667,
+        2.429
+      ],
+      "code": "result = df.select(pl.col(\"v\").ewm_mean(alpha=0.5, ignore_nulls=True).alias(\"ewm_mean\")).to_series().to_list()",
+      "raw_chars": 124
+    },
+    {
+      "id": "h2_log",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        0.0,
+        1.0
+      ],
+      "expected": [
+        0.0,
+        1.0
+      ],
+      "code": "result = df.select(pl.col(\"v\").log().round(3)).to_series().to_list()",
+      "raw_chars": 78
+    },
+    {
+      "id": "h2_scatter",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'ExprListNameSpace' object has no attribute 'set'. Did you mean: 'std'?. Did you mean: 'get'?",
+      "expected": [
+        10,
+        99,
+        30
+      ],
+      "code": "result = df.select(pl.col(\"v\").list.set(1, 99)).to_series().to_list()",
+      "raw_chars": 79
+    },
+    {
+      "id": "h2_to_physical",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        0,
+        1,
+        0
+      ],
+      "expected": [
+        0,
+        1,
+        0
+      ],
+      "code": "result = df.select(pl.col(\"c\").cast(pl.get_index_type())).to_series().to_list()",
+      "raw_chars": 89
+    },
+    {
+      "id": "h2_eq_missing",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        true,
+        null
+      ],
+      "expected": [
+        true,
+        true
+      ],
+      "code": "result = df.select(\n    pl.col(\"a\") == pl.col(\"b\")\n).to_series().to_list()",
+      "raw_chars": 84
+    },
+    {
+      "id": "h2_ne_missing",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        true,
+        null
+      ],
+      "expected": [
+        true,
+        false
+      ],
+      "code": "result = df.select(\n    pl.col(\"a\") != pl.col(\"b\")\n).to_series().to_list()",
+      "raw_chars": 84
+    },
+    {
+      "id": "h2_iter_rows",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": 6,
+      "expected": 6,
+      "code": "result = df.select(pl.col(\"v\").sum()).item()",
+      "raw_chars": 58
+    },
+    {
+      "id": "h2_collect_schema_names",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": "<bound method Schema.names of Schema({'p': Int64, 'q': Int64})>",
+      "expected": [
+        "p",
+        "q"
+      ],
+      "code": "result = df.schema.names",
+      "raw_chars": 34
+    },
+    {
+      "id": "h2_set_sorted_max",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 9,
+      "code": "1",
+      "raw_chars": 1
+    },
+    {
+      "id": "h2_lazy_filter",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'to_list'. Did you mean: 'to_dict'?",
+      "expected": [
+        3,
+        5
+      ],
+      "code": "result = df.lazy().filter(pl.col(\"v\") > 2).select(\"v\").collect().to_list()",
+      "raw_chars": 84
+    },
+    {
+      "id": "h2_lazy_select",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": [
+        "a"
+      ],
+      "code": "['a']",
+      "raw_chars": 5
+    },
+    {
+      "id": "h2_rolling_sum",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        {
+          "v": 1
+        },
+        {
+          "v": 3
+        },
+        {
+          "v": 5
+        },
+        {
+          "v": 7
+        }
+      ],
+      "expected": [
+        null,
+        3,
+        5,
+        7
+      ],
+      "code": "result = df.select(pl.col(\"v\").rolling_sum(window_size=2, min_samples=1))",
+      "raw_chars": 83
+    },
+    {
+      "id": "h2_rolling_min",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        {
+          "v": null
+        },
+        {
+          "v": 2
+        },
+        {
+          "v": 2
+        },
+        {
+          "v": 1
+        }
+      ],
+      "expected": [
+        null,
+        2,
+        2,
+        1
+      ],
+      "code": "result = df.select(pl.col(\"v\").rolling_min(window_size=2))",
+      "raw_chars": 68
+    },
+    {
+      "id": "h2_str_zfill",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        "0007",
+        "0042"
+      ],
+      "expected": [
+        "0007",
+        "0042"
+      ],
+      "code": "result = df.select(pl.col(\"s\").str.zfill(4)).to_series().to_list()",
+      "raw_chars": 76
+    },
+    {
+      "id": "h2_str_count_matches",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": [
+        3,
+        0
+      ],
+      "code": "[1, 0]",
+      "raw_chars": 6
+    },
+    {
+      "id": "h2_str_reverse",
+      "category": "held_out",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        "cba",
+        "yx"
+      ],
+      "expected": [
+        "cba",
+        "yx"
+      ],
+      "code": "result = df.select(pl.col(\"s\").str.reverse()).to_series().to_list()",
+      "raw_chars": 77
+    },
+    {
+      "id": "h2_str_to_titlecase",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'ExprStringNameSpace' object has no attribute 'title'. Did you mean: 'tail'?",
+      "expected": [
+        "Hello World"
+      ],
+      "code": "result = df.select(pl.col(\"s\").str.title().list()).to_series().to_list()",
+      "raw_chars": 82
+    },
+    {
+      "id": "h2_list_contains",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        {
+          "xs": true
+        },
+        {
+          "xs": false
+        }
+      ],
+      "expected": [
+        true,
+        false
+      ],
+      "code": "result = df.select(pl.col(\"xs\").list.contains(2))",
+      "raw_chars": 59
+    },
+    {
+      "id": "h2_agg_quantile",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        {
+          "g": "a",
+          "v": 3.0
+        },
+        {
+          "g": "b",
+          "v": 7.0
+        }
+      ],
+      "expected": {
+        "a": 3.0,
+        "b": 7.0
+      },
+      "code": "result = df.group_by(\"g\").agg(pl.col(\"v\").quantile(0.5))",
+      "raw_chars": 66
+    },
+    {
+      "id": "h2_agg_first_last",
+      "category": "held_out",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        {
+          "g": "b",
+          "first": 9,
+          "last": 9
+        },
+        {
+          "g": "a",
+          "first": 1,
+          "last": 2
+        }
+      ],
+      "expected": {
+        "a": [
+          1,
+          2
+        ],
+        "b": [
+          9,
+          9
+        ]
+      },
+      "code": "result = df.group_by(\"g\").agg(pl.col(\"v\").first().alias(\"first\"), pl.col(\"v\").last().alias(\"last\"))",
+      "raw_chars": 113
+    },
+    {
+      "id": "h2_cast_string",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'ExprStringNameSpace' object has no attribute 'to_string'. Did you mean: 'to_integer'?",
+      "expected": [
+        "1",
+        "22"
+      ],
+      "code": "result = df.select(pl.col(\"n\").str.to_string()).to_series().to_list()",
+      "raw_chars": 79
+    },
+    {
+      "id": "h2_estimated_rows",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 3,
+      "code": "3",
+      "raw_chars": 1
+    },
+    {
+      "id": "h2_select_all_exclude",
+      "category": "held_out",
+      "passed": false,
+      "ran": false,
+      "produced": "TypeError: unsupported operand type(s) for -: 'list' and 'str'",
+      "expected": [
+        "keep1",
+        "keep2"
+      ],
+      "code": "result = df.columns - \"drop_me\"",
+      "raw_chars": 41
+    }
+  ]
+}

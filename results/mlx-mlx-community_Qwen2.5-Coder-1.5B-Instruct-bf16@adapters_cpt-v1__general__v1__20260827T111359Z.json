@@ -1,0 +1,919 @@
+{
+  "model": "mlx:mlx-community/Qwen2.5-Coder-1.5B-Instruct-bf16@adapters/cpt-v1",
+  "prompt": "v1",
+  "note": "arm 2: CPT only, fence fix",
+  "tasks": "general",
+  "task_set_hash": "818cf42f7691",
+  "n_tasks": 60,
+  "timestamp": "20260827T111359Z",
+  "overall": 0.5833333333333334,
+  "by_category": {
+    "general_python": 0.5833333333333334
+  },
+  "elapsed_seconds": 82.89270091056824,
+  "median_chars": 58,
+  "runaway": 2,
+  "records": [
+    {
+      "id": "g_reverse_string",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": "sralop",
+      "expected": "sralop",
+      "code": "result = s[::-1]",
+      "raw_chars": 26
+    },
+    {
+      "id": "g_sum_list",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 14,
+      "code": "3",
+      "raw_chars": 1
+    },
+    {
+      "id": "g_word_count",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": {
+        "b": 1,
+        "c": 1,
+        "a": 3
+      },
+      "expected": {
+        "a": 3,
+        "b": 1,
+        "c": 1
+      },
+      "code": "words = ['a', 'b', 'a', 'c', 'a']\nresult = {w: words.count(w) for w in set(words)}",
+      "raw_chars": 96
+    },
+    {
+      "id": "g_filter_even",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        2,
+        4,
+        6
+      ],
+      "expected": [
+        2,
+        4,
+        6
+      ],
+      "code": "nums = [1, 2, 3, 4, 5, 6]\nresult = [n for n in nums if n % 2 == 0]",
+      "raw_chars": 80
+    },
+    {
+      "id": "g_sort_dicts",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "TypeError: list indices must be integers or slices, not str",
+      "expected": [
+        "b",
+        "a"
+      ],
+      "code": "result = sorted(people, key=lambda x: x['age'])['name']",
+      "raw_chars": 65
+    },
+    {
+      "id": "g_flatten",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "expected": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "code": "nested = [[1, 2], [3], [4, 5]]\nresult = [item for sublist in nested for item in sublist]",
+      "raw_chars": 102
+    },
+    {
+      "id": "g_dedupe_order",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": [
+        "a",
+        "b",
+        "c"
+      ],
+      "code": "result = list(dict.fromkeys(items))",
+      "raw_chars": 41
+    },
+    {
+      "id": "g_second_largest",
+      "category": "general_python",
+      "passed": false,
+      "ran": true,
+      "produced": 9,
+      "expected": 7,
+      "code": "nums = [5, 9, 2, 9, 7]\nresult = max(set(nums))",
+      "raw_chars": 56
+    },
+    {
+      "id": "g_invert_dict",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": {
+        "1": "a",
+        "2": "b"
+      },
+      "expected": {
+        "1": "a",
+        "2": "b"
+      },
+      "code": "result = {v: k for k, v in d.items()}",
+      "raw_chars": 43
+    },
+    {
+      "id": "g_zip_to_dict",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": {
+        "x": 10,
+        "y": 20
+      },
+      "expected": {
+        "x": 10,
+        "y": 20
+      },
+      "code": "result = dict(zip(keys, vals))",
+      "raw_chars": 40
+    },
+    {
+      "id": "g_running_total",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        1,
+        3,
+        6
+      ],
+      "expected": [
+        1,
+        3,
+        6
+      ],
+      "code": "nums = [1, 2, 3]\nresult = [sum(nums[:i+1]) for i in range(len(nums))]",
+      "raw_chars": 83
+    },
+    {
+      "id": "g_group_by_letter",
+      "category": "general_python",
+      "passed": false,
+      "ran": true,
+      "produced": {
+        "a": [
+          "ape"
+        ],
+        "b": [
+          "bee"
+        ]
+      },
+      "expected": {
+        "a": [
+          "ant",
+          "ape"
+        ],
+        "b": [
+          "bee"
+        ]
+      },
+      "code": "names = ['ant', 'bee', 'ape']\nresult = {name[0]: [name] for name in names}",
+      "raw_chars": 84
+    },
+    {
+      "id": "g_palindrome",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": true,
+      "expected": true,
+      "code": "s = 'level'\nresult = s == s[::-1]",
+      "raw_chars": 47
+    },
+    {
+      "id": "g_join_words",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": "a - b - c",
+      "expected": "a - b - c",
+      "code": "parts = ['a', 'b', 'c']\nresult = ' - '.join(parts)",
+      "raw_chars": 64
+    },
+    {
+      "id": "g_strip_split",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'list' object has no attribute 'strip'",
+      "expected": [
+        "a",
+        "b",
+        "c"
+      ],
+      "code": "line = ' a , b ,c '\nresult = line.split(',').strip()",
+      "raw_chars": 66
+    },
+    {
+      "id": "g_max_by_key",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": "b",
+      "expected": "b",
+      "code": "result = max(scores, key=lambda x: x['points'])['name']",
+      "raw_chars": 65
+    },
+    {
+      "id": "g_any_over",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": true,
+      "expected": true,
+      "code": "nums = [4, 250, 6]\nresult = any(x > 100 for x in nums)",
+      "raw_chars": 68
+    },
+    {
+      "id": "g_dict_get_default",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 0,
+      "code": "0",
+      "raw_chars": 1
+    },
+    {
+      "id": "g_sort_two_keys",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "TypeError: list indices must be integers or slices, not str",
+      "expected": [
+        9,
+        1,
+        4
+      ],
+      "code": "result = sorted(rows, key=lambda x: (x['grp'], x['v']), reverse=True)['v']",
+      "raw_chars": 84
+    },
+    {
+      "id": "g_char_count",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 3,
+      "code": "1",
+      "raw_chars": 1
+    },
+    {
+      "id": "g_merge_dicts",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": {
+        "a": 1,
+        "b": 9,
+        "c": 3
+      },
+      "expected": {
+        "a": 1,
+        "b": 9,
+        "c": 3
+      },
+      "code": "d1 = {'a': 1, 'b': 2}\nd2 = {'b': 9, 'c': 3}\nresult = {**d1, **d2}",
+      "raw_chars": 75
+    },
+    {
+      "id": "g_label_numbers",
+      "category": "general_python",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        "-4",
+        "0",
+        "7"
+      ],
+      "expected": [
+        "neg",
+        "zero",
+        "pos"
+      ],
+      "code": "result = [str(x) for x in nums]",
+      "raw_chars": 45
+    },
+    {
+      "id": "g_slice_step",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        1,
+        3,
+        5
+      ],
+      "expected": [
+        1,
+        3,
+        5
+      ],
+      "code": "items = [1, 2, 3, 4, 5]\nresult = items[::2]",
+      "raw_chars": 57
+    },
+    {
+      "id": "g_nested_get",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 5432,
+      "code": "5432",
+      "raw_chars": 4
+    },
+    {
+      "id": "g2_sum_squares",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 30,
+      "code": "100",
+      "raw_chars": 3
+    },
+    {
+      "id": "g2_count_vowels",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 5,
+      "code": "1",
+      "raw_chars": 1
+    },
+    {
+      "id": "g2_title_case",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": "Hello Wide World",
+      "expected": "Hello Wide World",
+      "code": "s = 'hello wide world'\nresult = s.title()",
+      "raw_chars": 51
+    },
+    {
+      "id": "g2_index_of",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 1,
+      "code": "1",
+      "raw_chars": 1
+    },
+    {
+      "id": "g2_drop_falsy",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        "a",
+        3,
+        "b"
+      ],
+      "expected": [
+        "a",
+        3,
+        "b"
+      ],
+      "code": "result = [x for x in items if x != \"\" and x != 0]",
+      "raw_chars": 55
+    },
+    {
+      "id": "g2_chunk",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          5
+        ]
+      ],
+      "code": "nums = [1, 2, 3, 4, 5]\nresult = [nums[i:i+2] for i in range(0, len(nums), 2)]",
+      "raw_chars": 91
+    },
+    {
+      "id": "g2_transpose",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": [
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          6
+        ]
+      ],
+      "code": "",
+      "raw_chars": 0
+    },
+    {
+      "id": "g2_min_by_key",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": "b",
+      "expected": "b",
+      "code": "people = [{'name': 'a', 'age': 40}, {'name': 'b', 'age': 22}]\nresult = min(people, key=lambda x: x['age'])['name']",
+      "raw_chars": 128
+    },
+    {
+      "id": "g2_filter_dict",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": {
+        "b": 30,
+        "c": 11
+      },
+      "expected": {
+        "b": 30,
+        "c": 11
+      },
+      "code": "result = {k: v for k, v in d.items() if v > 10}",
+      "raw_chars": 57
+    },
+    {
+      "id": "g2_sort_dict_by_value",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        "b",
+        "c",
+        "a"
+      ],
+      "expected": [
+        "b",
+        "c",
+        "a"
+      ],
+      "code": "result = sorted(d, key=d.get, reverse=True)",
+      "raw_chars": 49
+    },
+    {
+      "id": "g2_rotate",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        3,
+        4,
+        5,
+        1,
+        2
+      ],
+      "expected": [
+        3,
+        4,
+        5,
+        1,
+        2
+      ],
+      "code": "items = [1, 2, 3, 4, 5]\nresult = items[2:] + items[:2]",
+      "raw_chars": 68
+    },
+    {
+      "id": "g2_common",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        3,
+        4
+      ],
+      "expected": [
+        3,
+        4
+      ],
+      "code": "a = [1, 2, 3, 4]\nb = [3, 4, 5]\nresult = sorted(set(a) & set(b))",
+      "raw_chars": 77
+    },
+    {
+      "id": "g2_difference",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        1,
+        2
+      ],
+      "expected": [
+        1,
+        2
+      ],
+      "code": "a = [1, 2, 3, 4]\nb = [3, 4, 5]\nresult = sorted(set(a) - set(b))\nprint(result)",
+      "raw_chars": 91
+    },
+    {
+      "id": "g2_is_subset",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": true,
+      "expected": true,
+      "code": "a = [1, 3]\nb = [1, 2, 3]\nresult = all(x in b for x in a)",
+      "raw_chars": 70
+    },
+    {
+      "id": "g2_sort_chars",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": "aloprs",
+      "expected": "aloprs",
+      "code": "s = 'polars'\nresult = \"\".join(sorted(s))",
+      "raw_chars": 54
+    },
+    {
+      "id": "g2_reverse_words",
+      "category": "general_python",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        "three",
+        "two",
+        "one"
+      ],
+      "expected": "three two one",
+      "code": "s = 'one two three'\nresult = s.split()[::-1]",
+      "raw_chars": 58
+    },
+    {
+      "id": "g2_longest_word",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": "cccc",
+      "expected": "cccc",
+      "code": "s = 'a bb cccc dd'\nresult = max(s.split(), key=len)",
+      "raw_chars": 61
+    },
+    {
+      "id": "g2_sum_digits",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 12,
+      "code": "10",
+      "raw_chars": 2
+    },
+    {
+      "id": "g2_to_binary",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": "1010",
+      "expected": "1010",
+      "code": "result = bin(n)[2:]",
+      "raw_chars": 27
+    },
+    {
+      "id": "g2_pairs_to_dict",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": {
+        "a": 1,
+        "b": 2
+      },
+      "expected": {
+        "a": 1,
+        "b": 2
+      },
+      "code": "pairs = [['a', 1], ['b', 2]]\nresult = dict(pairs)",
+      "raw_chars": 59
+    },
+    {
+      "id": "g2_interleave",
+      "category": "general_python",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        1,
+        2,
+        3,
+        4,
+        1,
+        2,
+        3,
+        4,
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "code": "a = [1, 3, 5]\nb = [2, 4, 6]\nresult = [x for i in range(len(a) + len(b)) for x in (a[i % 2], b[i % 2])]",
+      "raw_chars": 116
+    },
+    {
+      "id": "g2_dedupe_string",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "SyntaxError: '(' was never closed",
+      "expected": "ban",
+      "code": "s = 'banana'\nresult = s.replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace(s[1:].replace",
+      "raw_chars": 1437
+    },
+    {
+      "id": "g2_group_parity",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": {
+        "even": [
+          2,
+          4
+        ],
+        "odd": [
+          1,
+          3
+        ]
+      },
+      "expected": {
+        "even": [
+          2,
+          4
+        ],
+        "odd": [
+          1,
+          3
+        ]
+      },
+      "code": "nums = [1, 2, 3, 4]\nresult = {\"even\": [2, 4], \"odd\": [1, 3]}",
+      "raw_chars": 70
+    },
+    {
+      "id": "g2_cumprod",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        1,
+        2,
+        6,
+        24
+      ],
+      "expected": [
+        1,
+        2,
+        6,
+        24
+      ],
+      "code": "nums = [1, 2, 3, 4]\nresult = [1, 2, 6, 24]",
+      "raw_chars": 52
+    },
+    {
+      "id": "g2_pairwise_sums",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        3,
+        5,
+        7
+      ],
+      "expected": [
+        3,
+        5,
+        7
+      ],
+      "code": "nums = [1, 2, 3, 4]\nresult = [nums[i] + nums[i + 1] for i in range(len(nums) - 1)]",
+      "raw_chars": 96
+    },
+    {
+      "id": "g2_max_consecutive",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 3,
+      "code": "3",
+      "raw_chars": 1
+    },
+    {
+      "id": "g2_factorial",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "SyntaxError: invalid syntax",
+      "expected": 720,
+      "code": "18! = 162261466377095040883680233833839711631269484006258925755731469395166377095040883680233833839711631269484006258925755731469395166377095040883680233833839711631269484006258925755731469395166377095040883680233833839711631269484006258925755731469395166377095040883680233833839711631269484006258925755731469395166377095040883680233833839711631269484006258925755731469395166377095040883680233833839711631269484006258925755731469395166377095040883680233833839711631269484006258925755731469395166377095040883680233",
+      "raw_chars": 513
+    },
+    {
+      "id": "g2_fizz_labels",
+      "category": "general_python",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        "fizz",
+        "5",
+        "both",
+        "7"
+      ],
+      "expected": [
+        "fizz",
+        "buzz",
+        "both",
+        "7"
+      ],
+      "code": "nums = [3, 5, 15, 7]\nresult = [str(n) if n % 3 else 'fizz' if n % 5 else 'both' for n in nums]",
+      "raw_chars": 104
+    },
+    {
+      "id": "g2_is_prime_list",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        7,
+        11
+      ],
+      "expected": [
+        7,
+        11
+      ],
+      "code": "nums = [4, 7, 9, 11]\nresult = [n for n in nums if n > 1 and all(n % d for d in range(2, n))]",
+      "raw_chars": 102
+    },
+    {
+      "id": "g2_gcd",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 6,
+      "code": "4",
+      "raw_chars": 1
+    },
+    {
+      "id": "g2_word_lengths",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": {
+        "ab": 2,
+        "cde": 3,
+        "f": 1
+      },
+      "expected": {
+        "ab": 2,
+        "cde": 3,
+        "f": 1
+      },
+      "code": "s = 'ab cde f'\nresult = {word: len(word) for word in s.split()}",
+      "raw_chars": 73
+    },
+    {
+      "id": "g2_nested_sum",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 15,
+      "code": "10",
+      "raw_chars": 2
+    },
+    {
+      "id": "g2_replace_substr",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": "dog and dog",
+      "expected": "dog and dog",
+      "code": "s = 'cat and cat'\nresult = s.replace('cat', 'dog')",
+      "raw_chars": 64
+    },
+    {
+      "id": "g2_count_above_mean",
+      "category": "general_python",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 1,
+      "code": "1",
+      "raw_chars": 1
+    },
+    {
+      "id": "g2_swap_case",
+      "category": "general_python",
+      "passed": true,
+      "ran": true,
+      "produced": "pOlArS",
+      "expected": "pOlArS",
+      "code": "s = 'PoLaRs'\nresult = s.swapcase()",
+      "raw_chars": 40
+    },
+    {
+      "id": "g2_zip_longest_pad",
+      "category": "general_python",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          "x"
+        ]
+      ],
+      "expected": [
+        [
+          1,
+          "x"
+        ],
+        [
+          2,
+          null
+        ],
+        [
+          3,
+          null
+        ]
+      ],
+      "code": "a = [1, 2, 3]\nb = ['x']\n\nresult = [a, b]",
+      "raw_chars": 54
+    }
+  ]
+}
