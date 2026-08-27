@@ -22,11 +22,45 @@ Baselines on the 48-task dev set:
 
 Measured on 120 polars tasks and 60 general-Python tasks:
 
-| | polars | general Python |
+| | polars dev (120) | general Python (60) | **held-out (30)** |
+|---|---|---|---|
+| base model, plain prompt | 20.0% | 83.3% | **43.3%** |
+| CPT only (2.4M tokens real code) | 28.3% | 58.3% | **53.3%** |
+| base model, best prompt | 25.0% | — | — |
+| SFT, polars data only | 33.3% | **10.0%** | — |
+| SFT + 25% replay | 38.3% | 41.7% | **13.3%** |
+| **SFT, broad coverage + 25% replay** | **60.0%** | 53.3% | **40.0%** |
+
+### The central result
+
+On **88 held-out tasks** — polars operations common in real third-party code
+but never trained on — all three models are statistically indistinguishable:
+
+| model | held-out (88) | p vs base |
 |---|---|---|
-| base model | 20.0% | 83.3% |
-| SFT, polars data only | 33.3% | **10.0%** ← forgot Python |
-| **SFT + 25% replay** | **38.3%** | **41.7%** |
+| base | 27.3% | — |
+| SFT (broad coverage + replay) | 30.7% | 0.728 |
+| CPT (2.4M tokens of real code) | 35.2% | 0.265 |
+
+**Neither supervised fine-tuning on synthetic data nor continued pretraining on
+real code demonstrated transfer to unseen operations at this scale.** In-
+distribution the same SFT model goes from 20.0% to 60.0% (p = 0.000). The gain
+is real; it just does not generalise past what was shown.
+
+An earlier 30-task version of this set showed CPT beating SFT by 13.3 points.
+Growing it to 88 shrank that to 4.5 points at p = 0.627. **That result would
+have been published.**
+
+**The third column is the honest one.** It uses polars operations that are
+common in real third-party code but that the model was never trained on and the
+dev set never tested. There, the best fine-tuned model is **indistinguishable
+from the untrained base** (40.0% vs 43.3%, p = 1.000) — and narrow training
+actively made it *worse* (13.3%, p = 0.012).
+
+**So the 20% → 60% gain is real but in-distribution only.** The model learned
+the operations it was shown and generalised to none beyond them. A benchmark
+built by the same person who built the training data cannot detect this; a
+held-out set chosen from real-world usage frequency can.
 
 **Training on polars alone doubled polars accuracy and destroyed general
 ability.** The model began writing `df['words'].value_counts()` for a plain
