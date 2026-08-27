@@ -1,0 +1,106 @@
+"""Additional ordinary-Python eval tasks — grows the general set 24 -> 60.
+
+Added because O12: at 24 tasks we could not detect the ~16-point residual
+deficit after replay (F38). "Not significant" meant "our instrument is too
+small", not "fully recovered".
+
+Deliberately NOT shaped like data_gen/general_generators.py, for the same
+reason the polars extras avoid the polars templates: otherwise we would be
+measuring replay-template recall rather than general Python ability.
+"""
+
+
+def _t(tid, instruction, setup, expected, solution):
+    return dict(id=tid, category="general_python", instruction=instruction,
+                setup=setup, expected=expected, solution=solution)
+
+
+EXTRA_TASKS = [
+    _t("g2_sum_squares", "Return the sum of the squares of every number in `nums`, as an integer.",
+       "nums = [1, 2, 3, 4]", 30, "result = sum(n * n for n in nums)"),
+    _t("g2_count_vowels", "Return how many vowels (a, e, i, o, u) appear in `s`, as an integer.",
+       # e-o-e-i-a = 5. First written as 6 (miscounted, 'y' is not in the list);
+       # caught by validate.py because expected and solution are independent.
+       "s = 'encyclopedia'", 5, "result = sum(1 for c in s if c in 'aeiou')"),
+    _t("g2_title_case", "Return `s` with the first letter of each word capitalised.",
+       "s = 'hello wide world'", "Hello Wide World", "result = s.title()"),
+    _t("g2_index_of", "Return the position of the first occurrence of 7 in `nums`, as an integer.",
+       "nums = [3, 7, 1, 7]", 1, "result = nums.index(7)"),
+    _t("g2_drop_falsy", "Return `items` with all empty strings and zeros removed, preserving order.",
+       "items = [0, 'a', '', 3, '', 0, 'b']", ["a", 3, "b"], "result = [x for x in items if x]"),
+    _t("g2_chunk", "Split `nums` into consecutive chunks of 2, returning a list of lists. The final chunk may be shorter.",
+       "nums = [1, 2, 3, 4, 5]", [[1, 2], [3, 4], [5]],
+       "result = [nums[i:i+2] for i in range(0, len(nums), 2)]"),
+    _t("g2_transpose", "Transpose `rows`, a list of equal-length lists, so rows become columns.",
+       "rows = [[1, 2, 3], [4, 5, 6]]", [[1, 4], [2, 5], [3, 6]],
+       "result = [list(c) for c in zip(*rows)]"),
+    _t("g2_min_by_key", "Return the name of the entry in `people` with the smallest 'age'.",
+       "people = [{'name': 'a', 'age': 40}, {'name': 'b', 'age': 22}]", "b",
+       "result = min(people, key=lambda p: p['age'])['name']"),
+    _t("g2_filter_dict", "Return a dict containing only the entries of `d` whose value is above 10.",
+       "d = {'a': 5, 'b': 30, 'c': 11}", {"b": 30, "c": 11},
+       "result = {k: v for k, v in d.items() if v > 10}"),
+    _t("g2_sort_dict_by_value", "Return the keys of `d` sorted by their value, largest first, as a list.",
+       "d = {'a': 3, 'b': 9, 'c': 5}", ["b", "c", "a"],
+       "result = sorted(d, key=lambda k: d[k], reverse=True)"),
+    _t("g2_rotate", "Return `items` rotated left by 2 positions.",
+       "items = [1, 2, 3, 4, 5]", [3, 4, 5, 1, 2], "result = items[2:] + items[:2]"),
+    _t("g2_common", "Return the values present in both `a` and `b`, sorted ascending, as a list.",
+       "a = [1, 2, 3, 4]\nb = [3, 4, 5]", [3, 4], "result = sorted(set(a) & set(b))"),
+    _t("g2_difference", "Return the values in `a` that are absent from `b`, sorted ascending, as a list.",
+       "a = [1, 2, 3, 4]\nb = [3, 4, 5]", [1, 2], "result = sorted(set(a) - set(b))"),
+    _t("g2_is_subset", "Return True if every value in `a` also appears in `b`, otherwise False.",
+       "a = [1, 3]\nb = [1, 2, 3]", True, "result = set(a) <= set(b)"),
+    _t("g2_sort_chars", "Return the characters of `s` sorted alphabetically, joined back into one string.",
+       "s = 'polars'", "aloprs", "result = ''.join(sorted(s))"),
+    _t("g2_reverse_words", "Return `s` with the order of its words reversed.",
+       "s = 'one two three'", "three two one", "result = ' '.join(s.split()[::-1])"),
+    _t("g2_longest_word", "Return the longest word in `s`. If several tie, return the first.",
+       "s = 'a bb cccc dd'", "cccc", "result = max(s.split(), key=len)"),
+    _t("g2_sum_digits", "Return the sum of the decimal digits of `n`, as an integer.",
+       "n = 4071", 12, "result = sum(int(c) for c in str(n))"),
+    _t("g2_to_binary", "Return the binary representation of `n` as a string, without any prefix.",
+       "n = 10", "1010", "result = format(n, 'b')"),
+    _t("g2_pairs_to_dict", "Turn `pairs`, a list of two-element lists, into a dict.",
+       "pairs = [['a', 1], ['b', 2]]", {"a": 1, "b": 2}, "result = {k: v for k, v in pairs}"),
+    _t("g2_interleave", "Interleave `a` and `b` into one list, taking alternately from each, starting with `a`.",
+       "a = [1, 3, 5]\nb = [2, 4, 6]", [1, 2, 3, 4, 5, 6],
+       "result = [x for pair in zip(a, b) for x in pair]"),
+    _t("g2_dedupe_string", "Return `s` with duplicate characters removed, keeping the first occurrence of each.",
+       "s = 'banana'", "ban", "result = ''.join(dict.fromkeys(s))"),
+    _t("g2_group_parity", "Split `nums` into a dict with keys 'even' and 'odd', each holding a list in original order.",
+       "nums = [1, 2, 3, 4]", {"even": [2, 4], "odd": [1, 3]},
+       "result = {'even': [n for n in nums if n % 2 == 0], 'odd': [n for n in nums if n % 2]}"),
+    _t("g2_cumprod", "Return the running cumulative product of `nums` as a list.",
+       "nums = [1, 2, 3, 4]", [1, 2, 6, 24],
+       "t = 1\nresult = []\nfor n in nums:\n    t *= n\n    result.append(t)"),
+    _t("g2_pairwise_sums", "Return the sum of each adjacent pair in `nums`, as a list.",
+       "nums = [1, 2, 3, 4]", [3, 5, 7],
+       "result = [nums[i] + nums[i+1] for i in range(len(nums) - 1)]"),
+    _t("g2_max_consecutive", "Return the length of the longest run of identical consecutive values in `items`, as an integer.",
+       "items = ['a', 'b', 'b', 'b', 'c', 'c']", 3,
+       "best = cur = 1\nfor i in range(1, len(items)):\n    cur = cur + 1 if items[i] == items[i-1] else 1\n    best = max(best, cur)\nresult = best"),
+    _t("g2_factorial", "Return the factorial of `n` as an integer.",
+       "n = 6", 720, "r = 1\nfor i in range(2, n + 1):\n    r *= i\nresult = r"),
+    _t("g2_fizz_labels", "For each number in `nums`, return 'fizz' if divisible by 3, 'buzz' if divisible by 5, 'both' if divisible by both, otherwise the number itself as a string.",
+       "nums = [3, 5, 15, 7]", ["fizz", "buzz", "both", "7"],
+       "result = ['both' if n % 15 == 0 else 'fizz' if n % 3 == 0 else 'buzz' if n % 5 == 0 else str(n) for n in nums]"),
+    _t("g2_is_prime_list", "Return only the prime numbers from `nums`, preserving order.",
+       "nums = [4, 7, 9, 11]", [7, 11],
+       "def p(x):\n    return x > 1 and all(x % d for d in range(2, int(x ** 0.5) + 1))\nresult = [n for n in nums if p(n)]"),
+    _t("g2_gcd", "Return the greatest common divisor of `a` and `b`, as an integer.",
+       "a = 48\nb = 18", 6, "x, y = a, b\nwhile y:\n    x, y = y, x % y\nresult = x"),
+    _t("g2_word_lengths", "Return a dict mapping each word in `s` to its length.",
+       "s = 'ab cde f'", {"ab": 2, "cde": 3, "f": 1}, "result = {w: len(w) for w in s.split()}"),
+    _t("g2_nested_sum", "Return the total of every number across all sublists of `nested`, as an integer.",
+       "nested = [[1, 2], [3], [4, 5]]", 15, "result = sum(sum(sub) for sub in nested)"),
+    _t("g2_replace_substr", "Return `s` with every occurrence of 'cat' replaced by 'dog'.",
+       "s = 'cat and cat'", "dog and dog", "result = s.replace('cat', 'dog')"),
+    _t("g2_count_above_mean", "Return how many values in `nums` are strictly above the mean, as an integer.",
+       "nums = [1, 2, 3, 10]", 1, "m = sum(nums) / len(nums)\nresult = sum(1 for n in nums if n > m)"),
+    _t("g2_swap_case", "Return `s` with the case of every letter flipped.",
+       "s = 'PoLaRs'", "pOlArS", "result = s.swapcase()"),
+    _t("g2_zip_longest_pad", "Combine `a` and `b` into a list of two-element lists, padding the shorter one with None.",
+       "a = [1, 2, 3]\nb = ['x']", [[1, "x"], [2, None], [3, None]],
+       "n = max(len(a), len(b))\nresult = [[a[i] if i < len(a) else None, b[i] if i < len(b) else None] for i in range(n)]"),
+]
