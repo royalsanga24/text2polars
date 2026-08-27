@@ -1,0 +1,8 @@
+polars>=1.40
+anthropic>=0.40
+
+# added in later phases:
+# pytest          (Phase 2, scorer tests)
+# datasets        (Phase 4)
+# unsloth, trl    (Phase 6 — training)
+# vllm            (Phase 7 — serving; Linux/GPU)
