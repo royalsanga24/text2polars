@@ -1,0 +1,28 @@
+# Virtual environments
+.venv/
+.venv-train/
+
+# Model weights and adapters — republish via Hugging Face, not git
+models/
+adapters/
+*.safetensors
+
+# Generated data — reproducible from data_gen/ and curation/
+data/mlx/
+data/mlx-cpt/
+data/mlx-broad25/
+data/mlx-broad50/
+data/sft/
+data/sft-broad25/
+data/sft-broad50/
+data/real/corpus.jsonl
+data/real/corpus_clean.jsonl
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Local
+.env
+.DS_Store

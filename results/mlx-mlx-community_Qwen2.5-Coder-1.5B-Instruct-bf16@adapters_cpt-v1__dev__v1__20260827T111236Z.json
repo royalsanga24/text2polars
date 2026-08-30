@@ -1,0 +1,1957 @@
+{
+  "model": "mlx:mlx-community/Qwen2.5-Coder-1.5B-Instruct-bf16@adapters/cpt-v1",
+  "prompt": "v1",
+  "note": "arm 2: CPT only, fence fix",
+  "tasks": "dev",
+  "task_set_hash": "f8809da02fed",
+  "n_tasks": 120,
+  "timestamp": "20260827T111236Z",
+  "overall": 0.2833333333333333,
+  "by_category": {
+    "output_convention": 0.3333333333333333,
+    "pandas_trap": 0.36666666666666664,
+    "stale_api": 0.36666666666666664,
+    "hard": 0.06666666666666667
+  },
+  "elapsed_seconds": 119.7414960861206,
+  "median_chars": 78,
+  "runaway": 1,
+  "records": [
+    {
+      "id": "oc_col_to_list",
+      "category": "output_convention",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        1,
+        2,
+        3
+      ],
+      "expected": [
+        1,
+        2,
+        3
+      ],
+      "code": "result = df[\"a\"].to_list()",
+      "raw_chars": 40
+    },
+    {
+      "id": "oc_scalar_sum",
+      "category": "output_convention",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 6,
+      "code": "10",
+      "raw_chars": 2
+    },
+    {
+      "id": "oc_first_value",
+      "category": "output_convention",
+      "passed": true,
+      "ran": true,
+      "produced": 42,
+      "expected": 42,
+      "code": "result = df.select(pl.col(\"x\").first()).to_series().item()",
+      "raw_chars": 72
+    },
+    {
+      "id": "oc_row_count",
+      "category": "output_convention",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 4,
+      "code": "3",
+      "raw_chars": 1
+    },
+    {
+      "id": "oc_column_names",
+      "category": "output_convention",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        "name",
+        "age"
+      ],
+      "expected": [
+        "name",
+        "age"
+      ],
+      "code": "result = df.columns",
+      "raw_chars": 33
+    },
+    {
+      "id": "oc_kv_dict",
+      "category": "output_convention",
+      "passed": false,
+      "ran": true,
+      "produced": {
+        "k": [
+          "a",
+          "b"
+        ],
+        "v": [
+          1,
+          2
+        ]
+      },
+      "expected": {
+        "a": 1,
+        "b": 2
+      },
+      "code": "result = df.to_dict(as_series=False)",
+      "raw_chars": 46
+    },
+    {
+      "id": "oc_rows_as_dicts",
+      "category": "output_convention",
+      "passed": false,
+      "ran": true,
+      "produced": {
+        "a": [
+          1,
+          2
+        ],
+        "b": [
+          "x",
+          "y"
+        ]
+      },
+      "expected": [
+        {
+          "a": 1,
+          "b": "x"
+        },
+        {
+          "a": 2,
+          "b": "y"
+        }
+      ],
+      "code": "result = df.to_dict(as_series=False)",
+      "raw_chars": 46
+    },
+    {
+      "id": "oc_max_float",
+      "category": "output_convention",
+      "passed": true,
+      "ran": true,
+      "produced": 9.25,
+      "expected": 9.25,
+      "code": "result = df.select(pl.col(\"v\").max()).to_series().item()",
+      "raw_chars": 70
+    },
+    {
+      "id": "oc_mean_rounded",
+      "category": "output_convention",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 2.33,
+      "code": "1.00",
+      "raw_chars": 4
+    },
+    {
+      "id": "oc_any_bool",
+      "category": "output_convention",
+      "passed": false,
+      "ran": true,
+      "produced": false,
+      "expected": true,
+      "code": "result = df.select(pl.col(\"v\") > 10).to_series().to_list()[0]",
+      "raw_chars": 75
+    },
+    {
+      "id": "oc_first_row_dict",
+      "category": "output_convention",
+      "passed": false,
+      "ran": true,
+      "produced": {
+        "a": [
+          1
+        ],
+        "b": [
+          "x"
+        ]
+      },
+      "expected": {
+        "a": 1,
+        "b": "x"
+      },
+      "code": "result = df.head(1).to_dict(as_series=False)",
+      "raw_chars": 54
+    },
+    {
+      "id": "oc_distinct_count",
+      "category": "output_convention",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 2,
+      "code": "3",
+      "raw_chars": 1
+    },
+    {
+      "id": "pt_sort_desc",
+      "category": "pandas_trap",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'to_list'. Did you mean: 'to_dict'?",
+      "expected": [
+        "y",
+        "z",
+        "x"
+      ],
+      "code": "result = df.sort(\"score\", descending=True).select(\"name\").to_list()",
+      "raw_chars": 77
+    },
+    {
+      "id": "pt_groupby_sum",
+      "category": "pandas_trap",
+      "passed": false,
+      "ran": true,
+      "produced": {
+        "team": [
+          "a",
+          "b"
+        ],
+        "pts": [
+          5,
+          5
+        ]
+      },
+      "expected": {
+        "a": 5,
+        "b": 5
+      },
+      "code": "result = df.group_by(\"team\").agg(pl.col(\"pts\").sum()).to_dict(as_series=False)",
+      "raw_chars": 88
+    },
+    {
+      "id": "pt_fill_nulls",
+      "category": "pandas_trap",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'Expr' object has no attribute 'to_list'",
+      "expected": [
+        1,
+        0,
+        3
+      ],
+      "code": "result = df.select(pl.col(\"v\").fill_null(0).to_list())",
+      "raw_chars": 64
+    },
+    {
+      "id": "pt_cast_type",
+      "category": "pandas_trap",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        1,
+        2,
+        3
+      ],
+      "expected": [
+        1,
+        2,
+        3
+      ],
+      "code": "result = df.select(pl.col(\"a\").cast(pl.Int64)).to_series().to_list()",
+      "raw_chars": 78
+    },
+    {
+      "id": "pt_merge_join",
+      "category": "pandas_trap",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'to_list'. Did you mean: 'to_dict'?",
+      "expected": [
+        "x",
+        "y"
+      ],
+      "code": "result = df.join(df2, on=\"id\", how=\"inner\").sort(\"id\").select(\"city\").to_list()",
+      "raw_chars": 89
+    },
+    {
+      "id": "pt_drop_duplicates",
+      "category": "pandas_trap",
+      "passed": false,
+      "ran": true,
+      "produced": {
+        "a": [
+          1,
+          2
+        ],
+        "b": [
+          "x",
+          "y"
+        ]
+      },
+      "expected": [
+        {
+          "a": 1,
+          "b": "x"
+        },
+        {
+          "a": 2,
+          "b": "y"
+        }
+      ],
+      "code": "result = df.unique().sort(\"a\").to_dict(as_series=False)",
+      "raw_chars": 65
+    },
+    {
+      "id": "pt_isin_filter",
+      "category": "pandas_trap",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'to_list'. Did you mean: 'to_dict'?",
+      "expected": [
+        "b",
+        "d"
+      ],
+      "code": "result = df.filter(pl.col(\"c\").is_in([\"b\", \"d\"])).select(\"c\").to_list()",
+      "raw_chars": 81
+    },
+    {
+      "id": "pt_value_counts",
+      "category": "pandas_trap",
+      "passed": false,
+      "ran": true,
+      "produced": {
+        "c": [
+          "a",
+          "b"
+        ],
+        "len": [
+          3,
+          1
+        ]
+      },
+      "expected": {
+        "a": 3,
+        "b": 1
+      },
+      "code": "result = df.group_by(\"c\").len().to_dict(as_series=False)",
+      "raw_chars": 66
+    },
+    {
+      "id": "pt_rename_column",
+      "category": "pandas_trap",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        "old"
+      ],
+      "expected": [
+        "new"
+      ],
+      "code": "result = df.columns",
+      "raw_chars": 33
+    },
+    {
+      "id": "pt_string_upper",
+      "category": "pandas_trap",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        "AB",
+        "CD"
+      ],
+      "expected": [
+        "AB",
+        "CD"
+      ],
+      "code": "result = df.select(pl.col(\"s\").str.to_uppercase()).to_series().to_list()",
+      "raw_chars": 82
+    },
+    {
+      "id": "pt_filter_select_cols",
+      "category": "pandas_trap",
+      "passed": false,
+      "ran": true,
+      "produced": {
+        "a": [
+          2,
+          3
+        ],
+        "c": [
+          8,
+          9
+        ]
+      },
+      "expected": [
+        {
+          "a": 2,
+          "c": 8
+        },
+        {
+          "a": 3,
+          "c": 9
+        }
+      ],
+      "code": "result = df.filter(pl.col(\"a\") > 1).select(\"a\", \"c\").to_dict(as_series=False)",
+      "raw_chars": 87
+    },
+    {
+      "id": "pt_nunique_per_group",
+      "category": "pandas_trap",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        {
+          "g": "y",
+          "v": 1
+        },
+        {
+          "g": "x",
+          "v": 1
+        }
+      ],
+      "expected": {
+        "x": 1,
+        "y": 1
+      },
+      "code": "result = df.group_by(\"g\").agg(pl.col(\"v\").n_unique())",
+      "raw_chars": 63
+    },
+    {
+      "id": "sa_with_columns",
+      "category": "stale_api",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        2,
+        4
+      ],
+      "expected": [
+        2,
+        4
+      ],
+      "code": "result = df.select(pl.col(\"a\") * 2).to_series().to_list()",
+      "raw_chars": 67
+    },
+    {
+      "id": "sa_row_count_expr",
+      "category": "stale_api",
+      "passed": false,
+      "ran": true,
+      "produced": {
+        "g": [
+          "b",
+          "a"
+        ],
+        "len": [
+          1,
+          2
+        ]
+      },
+      "expected": {
+        "a": 2,
+        "b": 1
+      },
+      "code": "result = df.group_by(\"g\").len().to_dict(as_series=False)",
+      "raw_chars": 66
+    },
+    {
+      "id": "sa_cum_sum",
+      "category": "stale_api",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        1,
+        3,
+        6
+      ],
+      "expected": [
+        1,
+        3,
+        6
+      ],
+      "code": "result = df.select(pl.col(\"v\").cum_sum()).to_series().to_list()",
+      "raw_chars": 73
+    },
+    {
+      "id": "sa_gather",
+      "category": "stale_api",
+      "passed": false,
+      "ran": false,
+      "produced": "polars.exceptions.InvalidOperationError: expected List data type for list operation, got: Int64",
+      "expected": [
+        10,
+        30
+      ],
+      "code": "result = df.select(pl.col(\"v\").list.get(pl.Series([0, 2])).alias(\"result\"))",
+      "raw_chars": 85
+    },
+    {
+      "id": "sa_str_length",
+      "category": "stale_api",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'ExprStringNameSpace' object has no attribute 'len'",
+      "expected": [
+        2,
+        4
+      ],
+      "code": "result = df.select(pl.col(\"s\").str.len().list.len())",
+      "raw_chars": 62
+    },
+    {
+      "id": "sa_rank_descending",
+      "category": "stale_api",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": [
+        2,
+        1,
+        3
+      ],
+      "code": "[1, 3, 2]",
+      "raw_chars": 9
+    },
+    {
+      "id": "sa_map_elements",
+      "category": "stale_api",
+      "passed": false,
+      "ran": false,
+      "produced": "polars.exceptions.InvalidOperationError: expected List data type for list operation, got: Int64",
+      "expected": [
+        1,
+        4,
+        9
+      ],
+      "code": "result = df.select(pl.col(\"n\").map_elements(lambda x: x**2).list.get(0))",
+      "raw_chars": 82
+    },
+    {
+      "id": "sa_list_namespace",
+      "category": "stale_api",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        2,
+        3
+      ],
+      "expected": [
+        2,
+        3
+      ],
+      "code": "result = df.select(pl.col(\"xs\").list.len()).to_series().to_list()",
+      "raw_chars": 75
+    },
+    {
+      "id": "sa_explode",
+      "category": "stale_api",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        [
+          1,
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "expected": [
+        1,
+        2,
+        3
+      ],
+      "code": "result = df.select(pl.col(\"xs\").list.eval(pl.element()).alias(\"xs\")).to_series().to_list()",
+      "raw_chars": 100
+    },
+    {
+      "id": "sa_top_k",
+      "category": "stale_api",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        9,
+        5
+      ],
+      "expected": [
+        9,
+        5
+      ],
+      "code": "result = df.select(pl.col(\"v\").sort(descending=True).head(2)).to_series().to_list()",
+      "raw_chars": 93
+    },
+    {
+      "id": "sa_shift_fill",
+      "category": "stale_api",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": [
+        0,
+        1,
+        2
+      ],
+      "code": "[0, 1, 2]",
+      "raw_chars": 9
+    },
+    {
+      "id": "sa_pivot",
+      "category": "stale_api",
+      "passed": false,
+      "ran": false,
+      "produced": "TypeError: DataFrame.to_dict() got an unexpected keyword argument 'orient'",
+      "expected": [
+        {
+          "r": "x",
+          "a": 1,
+          "b": 2
+        },
+        {
+          "r": "y",
+          "a": 3,
+          "b": null
+        }
+      ],
+      "code": "result = df.pivot(index=\"r\", on=\"c\", values=\"v\").to_dict(as_series=False, orient=\"row\")",
+      "raw_chars": 97
+    },
+    {
+      "id": "h_rank_over_group",
+      "category": "hard",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        [
+          2.0,
+          1.0
+        ],
+        [
+          2.0,
+          1.0
+        ]
+      ],
+      "expected": [
+        2,
+        1,
+        2,
+        1
+      ],
+      "code": "result = df.group_by(\"grp\").agg(pl.col(\"val\").rank(descending=True).alias(\"rank\")).select(\"rank\").to_series().to_list()",
+      "raw_chars": 129
+    },
+    {
+      "id": "h_multi_key_join",
+      "category": "hard",
+      "passed": false,
+      "ran": false,
+      "produced": "TypeError: expected `on` to be str or Expr, got 'list'",
+      "expected": [
+        100,
+        200
+      ],
+      "code": "result = df.join_asof(df2, on=[\"a\", \"b\"], strategy=\"forward\").sort(\"a\")[\"w\"].to_list()",
+      "raw_chars": 96
+    },
+    {
+      "id": "h_conditional_sum",
+      "category": "hard",
+      "passed": false,
+      "ran": false,
+      "produced": "SyntaxError: '(' was never closed",
+      "expected": {
+        "a": 1,
+        "b": 7
+      },
+      "code": "result = df.group_by(\"g\").agg(pl.col(\"v\").filter(pl.col(\"ok\")).sum().to_dict(as_series=False)",
+      "raw_chars": 103
+    },
+    {
+      "id": "h_top_n_per_group",
+      "category": "hard",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        "b",
+        "a"
+      ],
+      "expected": [
+        1,
+        5,
+        8,
+        9
+      ],
+      "code": "result = df.group_by(\"g\").agg(pl.col(\"v\").sort(descending=True).head(2)).to_series().to_list()",
+      "raw_chars": 104
+    },
+    {
+      "id": "h_rolling_mean",
+      "category": "hard",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": [
+        null,
+        1.5,
+        2.5,
+        3.5
+      ],
+      "code": "[None, 1.5, 2.5, 3.5]",
+      "raw_chars": 21
+    },
+    {
+      "id": "h_cumsum_by_group",
+      "category": "hard",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        "a",
+        "b"
+      ],
+      "expected": [
+        1,
+        3,
+        10,
+        30
+      ],
+      "code": "result = df.group_by(\"g\").agg(pl.col(\"v\").cum_sum()).to_series().to_list()",
+      "raw_chars": 84
+    },
+    {
+      "id": "h_lag_diff",
+      "category": "hard",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        {
+          "diff": null
+        },
+        {
+          "diff": 3
+        },
+        {
+          "diff": 5
+        }
+      ],
+      "expected": [
+        null,
+        3,
+        5
+      ],
+      "code": "result = df.select(pl.col(\"v\").diff().alias(\"diff\"))\nprint(result.to_series().to_list())",
+      "raw_chars": 98
+    },
+    {
+      "id": "h_multi_agg",
+      "category": "hard",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        {
+          "k": "a",
+          "v": 2.0,
+          "len": 2
+        },
+        {
+          "k": "b",
+          "v": 10.0,
+          "len": 1
+        }
+      ],
+      "expected": {
+        "a": [
+          2.0,
+          2
+        ],
+        "b": [
+          10.0,
+          1
+        ]
+      },
+      "code": "result = df.group_by(\"k\").agg([pl.col(\"v\").mean(), pl.len()])",
+      "raw_chars": 75
+    },
+    {
+      "id": "h_split_count",
+      "category": "hard",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 6,
+      "code": "3",
+      "raw_chars": 1
+    },
+    {
+      "id": "h_when_then_chain",
+      "category": "hard",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        {
+          "n": "low"
+        },
+        {
+          "n": "low"
+        },
+        {
+          "n": "mid"
+        },
+        {
+          "n": "mid"
+        },
+        {
+          "n": "high"
+        }
+      ],
+      "expected": [
+        "low",
+        "low",
+        "mid",
+        "mid",
+        "high"
+      ],
+      "code": "result = df.select(pl.col(\"n\").map_elements(lambda x: \"low\" if x < 10 else \"mid\" if x < 100 else \"high\"))",
+      "raw_chars": 115
+    },
+    {
+      "id": "h_filter_by_group_size",
+      "category": "hard",
+      "passed": false,
+      "ran": false,
+      "produced": "\t[1] 'group_by'",
+      "expected": [
+        "a",
+        "a"
+      ],
+      "code": "result = df.group_by(\"g\").agg(pl.col(\"g\").len()).filter(pl.col(\"g\") > 1).sort(\"g\").to_series().to_list()",
+      "raw_chars": 114
+    },
+    {
+      "id": "h_anti_join",
+      "category": "hard",
+      "passed": false,
+      "ran": false,
+      "produced": "TypeError: Expr.sort() takes 1 positional argument but 2 were given",
+      "expected": [
+        1,
+        3
+      ],
+      "code": "result = df.select(pl.col(\"id\").filter(~pl.col(\"id\").is_in(df2[\"id\"])).sort(\"id\").to_list())",
+      "raw_chars": 102
+    },
+    {
+      "id": "oc2_sum_float",
+      "category": "output_convention",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 6.75,
+      "code": "1.0",
+      "raw_chars": 3
+    },
+    {
+      "id": "oc2_n_columns",
+      "category": "output_convention",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 3,
+      "code": "3",
+      "raw_chars": 1
+    },
+    {
+      "id": "oc2_shape_list",
+      "category": "output_convention",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": [
+        3,
+        2
+      ],
+      "code": "[2, 2]",
+      "raw_chars": 6
+    },
+    {
+      "id": "oc2_null_count",
+      "category": "output_convention",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 2,
+      "code": "1",
+      "raw_chars": 1
+    },
+    {
+      "id": "oc2_last_row_dict",
+      "category": "output_convention",
+      "passed": false,
+      "ran": true,
+      "produced": {
+        "a": [
+          3
+        ],
+        "b": [
+          "z"
+        ]
+      },
+      "expected": {
+        "a": 3,
+        "b": "z"
+      },
+      "code": "result = df.tail(1).to_dict(as_series=False)",
+      "raw_chars": 54
+    },
+    {
+      "id": "oc2_nth_value",
+      "category": "output_convention",
+      "passed": true,
+      "ran": true,
+      "produced": 30,
+      "expected": 30,
+      "code": "result = df.select(pl.col(\"v\").get(2)).item()",
+      "raw_chars": 59
+    },
+    {
+      "id": "oc2_median_float",
+      "category": "output_convention",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 3.0,
+      "code": "0.5",
+      "raw_chars": 3
+    },
+    {
+      "id": "oc2_all_bool",
+      "category": "output_convention",
+      "passed": true,
+      "ran": true,
+      "produced": true,
+      "expected": true,
+      "code": "result = df.select(pl.col(\"v\").all().alias(\"result\")).to_series()[0]",
+      "raw_chars": 82
+    },
+    {
+      "id": "oc2_all_bool_false",
+      "category": "output_convention",
+      "passed": true,
+      "ran": true,
+      "produced": false,
+      "expected": false,
+      "code": "result = df.select(pl.col(\"v\") > 5).to_series().to_list()[0]",
+      "raw_chars": 70
+    },
+    {
+      "id": "oc2_pairs",
+      "category": "output_convention",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        "a",
+        "b"
+      ],
+      "expected": [
+        [
+          "a",
+          1
+        ],
+        [
+          "b",
+          2
+        ]
+      ],
+      "code": "result = df.select(pl.col(\"k\").alias(\"key\"), pl.col(\"v\").alias(\"value\")).to_series().to_list()",
+      "raw_chars": 104
+    },
+    {
+      "id": "oc2_dtypes_str",
+      "category": "output_convention",
+      "passed": false,
+      "ran": true,
+      "produced": "<bound method Schema.names of Schema({'a': Int64, 'b': String})>",
+      "expected": [
+        "Int64",
+        "String"
+      ],
+      "code": "result = df.schema.names",
+      "raw_chars": 34
+    },
+    {
+      "id": "oc2_unique_sorted_list",
+      "category": "output_convention",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        1,
+        2,
+        3
+      ],
+      "expected": [
+        1,
+        2,
+        3
+      ],
+      "code": "result = df.select(pl.col(\"c\").unique().sort()).to_series().to_list()",
+      "raw_chars": 79
+    },
+    {
+      "id": "oc2_min_int",
+      "category": "output_convention",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 2,
+      "code": "10",
+      "raw_chars": 2
+    },
+    {
+      "id": "oc2_std_rounded",
+      "category": "output_convention",
+      "passed": true,
+      "ran": true,
+      "produced": 2.138,
+      "expected": 2.138,
+      "code": "result = df.select(pl.col(\"v\").std().round(3)).item()",
+      "raw_chars": 67
+    },
+    {
+      "id": "oc2_is_empty",
+      "category": "output_convention",
+      "passed": true,
+      "ran": true,
+      "produced": false,
+      "expected": false,
+      "code": "result = df.height == 0",
+      "raw_chars": 37
+    },
+    {
+      "id": "oc2_column_as_strings",
+      "category": "output_convention",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'ExprStringNameSpace' object has no attribute 'to_string'. Did you mean: 'to_integer'?",
+      "expected": [
+        "1",
+        "2",
+        "3"
+      ],
+      "code": "result = df.select(pl.col(\"n\").str.to_string()).to_series().to_list()",
+      "raw_chars": 83
+    },
+    {
+      "id": "oc2_sum_two_cols",
+      "category": "output_convention",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 33,
+      "code": "100",
+      "raw_chars": 3
+    },
+    {
+      "id": "oc2_count_matching",
+      "category": "output_convention",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 2,
+      "code": "3",
+      "raw_chars": 1
+    },
+    {
+      "id": "pt2_between",
+      "category": "pandas_trap",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        10,
+        22,
+        30
+      ],
+      "expected": [
+        10,
+        22,
+        30
+      ],
+      "code": "result = df.filter(pl.col(\"v\").is_between(10, 30)).to_series().to_list()",
+      "raw_chars": 86
+    },
+    {
+      "id": "pt2_startswith",
+      "category": "pandas_trap",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        "A1",
+        "A3"
+      ],
+      "expected": [
+        "A1",
+        "A3"
+      ],
+      "code": "result = df.filter(pl.col(\"sku\").str.starts_with(\"A\")).to_series().to_list()",
+      "raw_chars": 86
+    },
+    {
+      "id": "pt2_str_replace",
+      "category": "pandas_trap",
+      "passed": false,
+      "ran": false,
+      "produced": "polars.exceptions.InvalidOperationError: expected List data type for list operation, got: String",
+      "expected": [
+        "a_b",
+        "c_d"
+      ],
+      "code": "result = df.select(pl.col(\"s\").str.replace(\"-\", \"_\").list.get(0)).to_series().to_list()",
+      "raw_chars": 97
+    },
+    {
+      "id": "pt2_dropna",
+      "category": "pandas_trap",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        1,
+        3
+      ],
+      "expected": [
+        1,
+        3
+      ],
+      "code": "result = df.filter(pl.col(\"v\").is_not_null()).to_series().to_list()",
+      "raw_chars": 81
+    },
+    {
+      "id": "pt2_abs",
+      "category": "pandas_trap",
+      "passed": false,
+      "ran": false,
+      "produced": "polars.exceptions.InvalidOperationError: `element` is not allowed in this context",
+      "expected": [
+        3,
+        4,
+        5
+      ],
+      "code": "result = df.select(pl.col(\"v\").abs().list.get(pl.element())).to_series().to_list()",
+      "raw_chars": 92
+    },
+    {
+      "id": "pt2_round_col",
+      "category": "pandas_trap",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        1.2,
+        3.7
+      ],
+      "expected": [
+        1.2,
+        3.7
+      ],
+      "code": "result = df.select(pl.col(\"v\").round(1)).to_series().to_list()",
+      "raw_chars": 72
+    },
+    {
+      "id": "pt2_clip",
+      "category": "pandas_trap",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        4,
+        10,
+        9,
+        10
+      ],
+      "expected": [
+        4,
+        10,
+        9,
+        10
+      ],
+      "code": "result = df.select(pl.col(\"v\").map_elements(lambda x: min(x, 10))).to_series().to_list()",
+      "raw_chars": 98
+    },
+    {
+      "id": "pt2_sort_two_cols",
+      "category": "pandas_trap",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        "b",
+        "a",
+        "a"
+      ],
+      "expected": [
+        9,
+        5,
+        1
+      ],
+      "code": "result = df.sort(\"g\", \"v\", descending=[True, False]).to_series().to_list()",
+      "raw_chars": 84
+    },
+    {
+      "id": "pt2_concat_rows",
+      "category": "pandas_trap",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        1,
+        2,
+        3
+      ],
+      "expected": [
+        1,
+        2,
+        3
+      ],
+      "code": "result = df.vstack(df2).to_series().to_list()",
+      "raw_chars": 55
+    },
+    {
+      "id": "pt2_groupby_two_keys",
+      "category": "pandas_trap",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        "a",
+        "a",
+        "b"
+      ],
+      "expected": [
+        1,
+        2,
+        7
+      ],
+      "code": "result = df.group_by(\"g\", \"h\").agg(pl.col(\"v\").sum()).sort(\"v\").to_series().to_list()",
+      "raw_chars": 95
+    },
+    {
+      "id": "pt2_idxmax",
+      "category": "pandas_trap",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 1,
+      "code": "3",
+      "raw_chars": 1
+    },
+    {
+      "id": "pt2_head_tail",
+      "category": "pandas_trap",
+      "passed": false,
+      "ran": false,
+      "produced": "TypeError: Expr.last() takes 1 positional argument but 2 were given",
+      "expected": [
+        3,
+        4
+      ],
+      "code": "result = df.select(pl.col(\"v\").last(2)).to_series().to_list()",
+      "raw_chars": 71
+    },
+    {
+      "id": "pt2_mean_per_column",
+      "category": "pandas_trap",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        {
+          "a": 3.0,
+          "b": 15.0
+        }
+      ],
+      "expected": {
+        "a": 3.0,
+        "b": 15.0
+      },
+      "code": "result = df.select(pl.col(\"*\").mean())",
+      "raw_chars": 48
+    },
+    {
+      "id": "pt2_nlargest",
+      "category": "pandas_trap",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        22,
+        13
+      ],
+      "expected": [
+        22,
+        13
+      ],
+      "code": "result = df.select(pl.col(\"v\").sort(descending=True).head(2)).to_series().to_list()",
+      "raw_chars": 93
+    },
+    {
+      "id": "pt2_where_mask",
+      "category": "pandas_trap",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        0,
+        3,
+        0,
+        8
+      ],
+      "expected": [
+        0,
+        3,
+        0,
+        8
+      ],
+      "code": "result = df.select(pl.col(\"v\").map_elements(lambda x: 0 if x < 0 else x)).to_series().to_list()",
+      "raw_chars": 105
+    },
+    {
+      "id": "pt2_duplicated",
+      "category": "pandas_trap",
+      "passed": false,
+      "ran": false,
+      "produced": "SyntaxError: '(' was never closed",
+      "expected": [
+        2,
+        3
+      ],
+      "code": "result = df.select(pl.col(\"v\").filter(pl.col(\"v\").is_in(pl.col(\"v\").sort().drop_nulls().unique().drop_nulls())).to_list()",
+      "raw_chars": 131
+    },
+    {
+      "id": "pt2_select_dtypes",
+      "category": "pandas_trap",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": [
+        "b",
+        "c"
+      ],
+      "code": "['b', 'c']",
+      "raw_chars": 10
+    },
+    {
+      "id": "pt2_astype_float",
+      "category": "pandas_trap",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        1.0,
+        2.0
+      ],
+      "expected": [
+        1.0,
+        2.0
+      ],
+      "code": "result = df.select(pl.col(\"a\").cast(pl.Float64)).to_series().to_list()",
+      "raw_chars": 80
+    },
+    {
+      "id": "sa2_with_row_index",
+      "category": "stale_api",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        3.0,
+        2.0,
+        1.0
+      ],
+      "expected": [
+        0,
+        1,
+        2
+      ],
+      "code": "result = df.select(pl.col(\"v\").rank().alias(\"idx\")).to_series().to_list()",
+      "raw_chars": 83
+    },
+    {
+      "id": "sa2_cum_max",
+      "category": "stale_api",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        {
+          "v": null
+        },
+        {
+          "v": 3
+        },
+        {
+          "v": 7
+        },
+        {
+          "v": 7
+        }
+      ],
+      "expected": [
+        3,
+        3,
+        7,
+        7
+      ],
+      "code": "result = df.select(pl.col(\"v\").rolling_max(window_size=2))",
+      "raw_chars": 72
+    },
+    {
+      "id": "sa2_cum_prod",
+      "category": "stale_api",
+      "passed": false,
+      "ran": false,
+      "produced": "polars.exceptions.InvalidOperationError: argument in operation 'rolling' is not sorted, please sort the 'expr/series/column' first",
+      "expected": [
+        2,
+        6,
+        12
+      ],
+      "code": "result = df.select(pl.col(\"v\").rolling(\"v\", period=\"1i\").list.eval(pl.element().cum_prod()))",
+      "raw_chars": 102
+    },
+    {
+      "id": "sa2_arg_sort",
+      "category": "stale_api",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": [
+        1,
+        2,
+        0
+      ],
+      "code": "[1, 2, 0]",
+      "raw_chars": 9
+    },
+    {
+      "id": "sa2_strip_chars",
+      "category": "stale_api",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'ExprStringNameSpace' object has no attribute 'strip'. Did you mean: 'strip_chars'?",
+      "expected": [
+        "a",
+        "b"
+      ],
+      "code": "result = df.select(pl.col(\"s\").str.strip()).to_series().to_list()",
+      "raw_chars": 75
+    },
+    {
+      "id": "sa2_bottom_k",
+      "category": "stale_api",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        2,
+        5
+      ],
+      "expected": [
+        2,
+        5
+      ],
+      "code": "result = df.select(pl.col(\"v\").sort().head(2)).to_series().to_list()",
+      "raw_chars": 78
+    },
+    {
+      "id": "sa2_concat_str",
+      "category": "stale_api",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        "x-y"
+      ],
+      "expected": [
+        "x-1",
+        "y-2"
+      ],
+      "code": "result = df.select(pl.col(\"a\").str.join(\"-\").alias(\"a_b\")).to_series().to_list()",
+      "raw_chars": 90
+    },
+    {
+      "id": "sa2_is_duplicated",
+      "category": "stale_api",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        {
+          "v": false
+        },
+        {
+          "v": true
+        },
+        {
+          "v": false
+        }
+      ],
+      "expected": [
+        true,
+        false,
+        true
+      ],
+      "code": "result = df.select(pl.col(\"v\").map_elements(lambda x: x > 1))",
+      "raw_chars": 71
+    },
+    {
+      "id": "sa2_unique_maintain_order",
+      "category": "stale_api",
+      "passed": false,
+      "ran": false,
+      "produced": "polars.exceptions.InvalidOperationError: expected List data type for list operation, got: String",
+      "expected": [
+        "b",
+        "a",
+        "c"
+      ],
+      "code": "result = df.select(pl.col(\"c\").unique().list.get(0)).to_series().to_list()",
+      "raw_chars": 84
+    },
+    {
+      "id": "sa2_str_to_lower",
+      "category": "stale_api",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        "ab",
+        "cd"
+      ],
+      "expected": [
+        "ab",
+        "cd"
+      ],
+      "code": "result = df.select(pl.col(\"s\").str.to_lowercase()).to_series().to_list()",
+      "raw_chars": 82
+    },
+    {
+      "id": "sa2_list_sum",
+      "category": "stale_api",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        3,
+        12
+      ],
+      "expected": [
+        3,
+        12
+      ],
+      "code": "result = df.select(pl.col(\"xs\").list.sum()).to_series().to_list()",
+      "raw_chars": 75
+    },
+    {
+      "id": "sa2_list_first",
+      "category": "stale_api",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        7,
+        4
+      ],
+      "expected": [
+        7,
+        4
+      ],
+      "code": "result = df.select(pl.col(\"xs\").list.get(0)).to_series().to_list()",
+      "raw_chars": 76
+    },
+    {
+      "id": "sa2_str_contains_literal",
+      "category": "stale_api",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        "a.csv",
+        "cxcsv"
+      ],
+      "expected": [
+        "a.csv"
+      ],
+      "code": "result = df.filter(pl.col(\"p\").str.contains(\".csv\")).to_series().to_list()",
+      "raw_chars": 84
+    },
+    {
+      "id": "sa2_replace_values",
+      "category": "stale_api",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        1,
+        99,
+        3,
+        99
+      ],
+      "expected": [
+        1,
+        99,
+        3,
+        99
+      ],
+      "code": "result = df.select(pl.col(\"v\").replace(2, 99)).to_series().to_list()",
+      "raw_chars": 78
+    },
+    {
+      "id": "sa2_diff",
+      "category": "stale_api",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        {
+          "v": 10,
+          "diff": null
+        },
+        {
+          "v": 14,
+          "diff": 4
+        },
+        {
+          "v": 9,
+          "diff": -5
+        }
+      ],
+      "expected": [
+        null,
+        4,
+        -5
+      ],
+      "code": "result = df.with_columns(pl.col(\"v\").diff().alias(\"diff\"))",
+      "raw_chars": 68
+    },
+    {
+      "id": "sa2_n_unique_expr",
+      "category": "stale_api",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 3,
+      "code": "3",
+      "raw_chars": 1
+    },
+    {
+      "id": "sa2_str_slice",
+      "category": "stale_api",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        "ab",
+        "wx"
+      ],
+      "expected": [
+        "ab",
+        "wx"
+      ],
+      "code": "result = df.select(pl.col(\"s\").str.slice(0, 2)).to_series().to_list()",
+      "raw_chars": 79
+    },
+    {
+      "id": "sa2_fill_null_strategy",
+      "category": "stale_api",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        1,
+        1,
+        1,
+        4
+      ],
+      "expected": [
+        1,
+        1,
+        1,
+        4
+      ],
+      "code": "result = df.select(pl.col(\"v\").fill_null(strategy=\"forward\")).to_series().to_list()",
+      "raw_chars": 93
+    },
+    {
+      "id": "h2_pct_of_group",
+      "category": "hard",
+      "passed": false,
+      "ran": false,
+      "produced": "Did you mean \"g\"?",
+      "expected": [
+        25.0,
+        75.0,
+        100.0
+      ],
+      "code": "result = df.group_by(\"g\").agg(pl.col(\"v\").sum().alias(\"total\")).with_columns(\n    pl.col(\"v\").map_elements(lambda x: round(x / x.total, 1))\n).to_series().to_list()",
+      "raw_chars": 173
+    },
+    {
+      "id": "h2_first_per_group",
+      "category": "hard",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        {
+          "g": "b",
+          "v": 5
+        },
+        {
+          "g": "a",
+          "v": 1
+        }
+      ],
+      "expected": {
+        "a": 1,
+        "b": 5
+      },
+      "code": "result = df.group_by(\"g\").agg(pl.col(\"v\").first())",
+      "raw_chars": 60
+    },
+    {
+      "id": "h2_group_filter_agg",
+      "category": "hard",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        "a",
+        "b"
+      ],
+      "expected": [
+        "a",
+        "b"
+      ],
+      "code": "result = df.group_by(\"g\").agg(pl.col(\"v\").sum()).filter(pl.col(\"v\") > 5).sort(\"g\").select(\"g\").to_series().to_list()",
+      "raw_chars": 126
+    },
+    {
+      "id": "h2_join_then_group",
+      "category": "hard",
+      "passed": false,
+      "ran": true,
+      "produced": {
+        "region": [
+          "n",
+          "s"
+        ],
+        "amt": [
+          40,
+          20
+        ]
+      },
+      "expected": {
+        "n": 40,
+        "s": 20
+      },
+      "code": "result = df.join(df2, on=\"id\", how=\"left\").group_by(\"region\").agg(pl.col(\"amt\").sum()).to_dict(as_series=False)",
+      "raw_chars": 121
+    },
+    {
+      "id": "h2_running_max_group",
+      "category": "hard",
+      "passed": false,
+      "ran": false,
+      "produced": "TypeError: Expr.rolling_max() missing 1 required positional argument: 'window_size'",
+      "expected": [
+        3,
+        3,
+        9,
+        12
+      ],
+      "code": "result = df.group_by(\"g\").agg(pl.col(\"v\").rolling_max().alias(\"v_max\"))\nprint(result.to_series().to_list())",
+      "raw_chars": 430
+    },
+    {
+      "id": "h2_diff_within_group",
+      "category": "hard",
+      "passed": false,
+      "ran": false,
+      "produced": "\t[1] 'group_by'",
+      "expected": [
+        null,
+        3,
+        null,
+        -3
+      ],
+      "code": "result = df.group_by(\"g\").agg(pl.col(\"v\").diff().list.head(2).alias(\"diff\"))",
+      "raw_chars": 86
+    },
+    {
+      "id": "h2_split_explode_count",
+      "category": "hard",
+      "passed": false,
+      "ran": true,
+      "produced": {
+        "tags": [
+          {
+            "tags": "a",
+            "count": 1
+          },
+          {
+            "tags": "c",
+            "count": 1
+          },
+          {
+            "tags": "b",
+            "count": 3
+          }
+        ]
+      },
+      "expected": {
+        "a": 1,
+        "b": 3,
+        "c": 1
+      },
+      "code": "result = df.select(pl.col(\"tags\").str.split(\",\").explode().value_counts()).to_dict(as_series=False)",
+      "raw_chars": 109
+    },
+    {
+      "id": "h2_cross_join",
+      "category": "hard",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 6,
+      "code": "1",
+      "raw_chars": 1
+    },
+    {
+      "id": "h2_top1_per_group_name",
+      "category": "hard",
+      "passed": false,
+      "ran": false,
+      "produced": "TypeError: Expr.arg_max() takes 1 positional argument but 2 were given",
+      "expected": {
+        "a": "q",
+        "b": "r"
+      },
+      "code": "result = df.group_by(\"g\").agg(pl.col(\"name\").arg_max(\"v\")).to_dict(as_series=False)",
+      "raw_chars": 93
+    },
+    {
+      "id": "h2_conditional_count",
+      "category": "hard",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        {
+          "g": "a",
+          "v": 1
+        },
+        {
+          "g": "b",
+          "v": 1
+        }
+      ],
+      "expected": {
+        "a": 1,
+        "b": 1
+      },
+      "code": "result = df.group_by(\"g\").agg(pl.col(\"v\").filter(pl.col(\"v\") > 5).len())",
+      "raw_chars": 82
+    },
+    {
+      "id": "h2_normalize_column",
+      "category": "hard",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'Expr' object has no attribute 'to_list'",
+      "expected": [
+        0.0,
+        0.5,
+        1.0
+      ],
+      "code": "result = df.select(pl.col(\"v\").cast(pl.Float64).map_elements(lambda x: (x - df.select(pl.col(\"v\").min()).item()) / (df.select(pl.col(\"v\").max()).item() - df.select(pl.col(\"v\").min()).item())).to_list()[:3])",
+      "raw_chars": 220
+    },
+    {
+      "id": "h2_two_agg_ratio",
+      "category": "hard",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'DataFrame' object has no attribute 'round'. Did you mean: 'count'?",
+      "expected": {
+        "a": 1.5,
+        "b": 9.0
+      },
+      "code": "result = df.group_by(\"g\").agg(pl.col(\"v\").mean() / pl.len()).round(2).to_dict(as_series=False)",
+      "raw_chars": 104
+    },
+    {
+      "id": "h2_anti_join_names",
+      "category": "hard",
+      "passed": false,
+      "ran": true,
+      "produced": [
+        {
+          "id": 3,
+          "name": "bob"
+        },
+        {
+          "id": 1,
+          "name": "zoe"
+        }
+      ],
+      "expected": [
+        "bob",
+        "zoe"
+      ],
+      "code": "result = df.filter(~pl.col(\"id\").is_in(df2[\"id\"])).sort(\"name\")",
+      "raw_chars": 73
+    },
+    {
+      "id": "h2_semi_join_count",
+      "category": "hard",
+      "passed": false,
+      "ran": false,
+      "produced": "NameError: name 'result' is not defined",
+      "expected": 2,
+      "code": "1",
+      "raw_chars": 1
+    },
+    {
+      "id": "h2_rank_then_filter",
+      "category": "hard",
+      "passed": false,
+      "ran": false,
+      "produced": "AttributeError: 'LazyFrame' object has no attribute 'rank'",
+      "expected": [
+        "c",
+        "a"
+      ],
+      "code": "result = df.lazy().rank(descending=True).filter(pl.col(\"rank\").is_in([2, 3])).select(\"name\").collect().to_series().to_list()",
+      "raw_chars": 134
+    },
+    {
+      "id": "h2_multi_when_chain",
+      "category": "hard",
+      "passed": true,
+      "ran": true,
+      "produced": [
+        "fail",
+        "pass",
+        "merit",
+        "distinction"
+      ],
+      "expected": [
+        "fail",
+        "pass",
+        "merit",
+        "distinction"
+      ],
+      "code": "result = df.select(\n    pl.col(\"score\").map_elements(\n        lambda x: \"fail\" if x < 40 else\n        \"pass\" if x < 70 else\n        \"merit\" if x < 90 else \"distinction\"\n    )\n).to_series().to_list()",
+      "raw_chars": 208
+    },
+    {
+      "id": "h2_group_concat",
+      "category": "hard",
+      "passed": false,
+      "ran": false,
+      "produced": "TypeError: Expr.implode() got an unexpected keyword argument 'separator'",
+      "expected": {
+        "a": "x+z",
+        "b": "y"
+      },
+      "code": "result = df.group_by(\"g\").agg(pl.col(\"w\").implode(separator=\"+\").alias(\"w\"))",
+      "raw_chars": 86
+    },
+    {
+      "id": "h2_lag_compare",
+      "category": "hard",
+      "passed": false,
+      "ran": false,
+      "produced": "polars.exceptions.ColumnNotFoundError: unable to find column \"prev\"; valid columns: [\"v\"]",
+      "expected": [
+        false,
+        true,
+        false,
+        true
+      ],
+      "code": "result = df.with_columns(\n    pl.col(\"v\").shift().alias(\"prev\"),\n    pl.col(\"v\") > pl.col(\"prev\").alias(\"is_greater\")\n).select(\"is_greater\").to_series().to_list()",
+      "raw_chars": 172
+    }
+  ]
+}
